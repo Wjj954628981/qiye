@@ -46,10 +46,10 @@ class ProductWarehouseOut extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'product_id' => 'Product ID',
-            'warehouse_id' => 'Warehouse ID',
-            'product_out_orderid' => 'Product Out Orderid',
-            'product_out_count' => 'Product Out Count',
+            'product_id' => '产品ID',
+            'warehouse_id' => '仓库ID',
+            'product_out_orderid' => '产品出库单ID',
+            'product_out_count' => '产品数量',
         ];
     }
 

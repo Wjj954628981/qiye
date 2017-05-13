@@ -37,6 +37,7 @@ class OrderlistController extends Controller
     {
         $searchModel = new SearchOrderlist();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $dataProvider->pagination->defaultPageSize =10;
 
         return $this->render('index', [
             'searchModel' => $searchModel,
@@ -121,4 +122,5 @@ class OrderlistController extends Controller
             throw new NotFoundHttpException('The requested page does not exist.');
         }
     }
+
 }

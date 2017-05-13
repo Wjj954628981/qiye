@@ -28,7 +28,7 @@ AppAsset::register($this);
     <?php
     NavBar::begin([
         'brandLabel' => '光电码盘管理系统',
-        'brandUrl' => Yii::$app->homeUrl,
+        'brandUrl' => 'http://localhost/qiye/views/vic/material_category.php',
         'options' => [
             'class' => 'navbar-inverse navbar-fixed-top',
         ],
@@ -36,10 +36,32 @@ AppAsset::register($this);
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav navbar-right'],
         'items' => [
-            ['label' => '货物入库', 'url' => ['/material-warehouse-in/index']],
-            ['label' => '货物出库', 'url' => ['/material-warehouse-out/index']],
-            ['label' => '产品入库', 'url' => ['/product-warehouse-in/index']],
-            ['label' => '产品出库', 'url' => ['/product-warehouse-out/index']],
+            ['label' => '订单列表', 'url' => ['/orderlist']],
+            ['label' => '仓库',
+            // 'url' => ['/material-lack-order'],
+            'items' => [
+                            [
+                                'label' => '仓库情况',
+                                'url' => ['/warehouse'],
+                            ],
+                            [
+                                'label' => '缺料单',
+                                'url' => ['/material-lack-order'],
+                            ],
+                            [
+                                'label' => '出库单',
+                                'url' => ['/material-warehouse-out-order'],
+                            ],
+                            [
+                                'label' => '入库单',
+                                'url' => ['/material-warehouse-in-order'],
+                            ]
+                       ]
+            ],
+            // ['label' => '仓库情况', 'url' => ['/warehouse']],
+            // ['label' => '缺料单', 'url' => ['/material-lack-order']],
+            // ['label' => '出库单', 'url' => ['/material-warehouse-out-order']],
+            // ['label' => '入库单', 'url' => ['/material-warehouse-in-order']],
             Yii::$app->user->isGuest ? (
                 ['label' => 'Login', 'url' => ['/site/login']]
             ) : (
@@ -56,7 +78,6 @@ AppAsset::register($this);
     ]);
     NavBar::end();
     ?>
-
     <div class="container">
         <?= Breadcrumbs::widget([
             'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],

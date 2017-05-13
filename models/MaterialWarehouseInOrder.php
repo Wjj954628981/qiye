@@ -43,10 +43,10 @@ class MaterialWarehouseInOrder extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'material_in_orderid' => 'Material In Orderid',
-            'employee_id' => 'Employee ID',
-            'material_in_ordertime' => 'Material In Ordertime',
-            'material_in_orderremark' => 'Material In Orderremark',
+            'material_in_orderid' => '材料入库单ID',
+            'employee_id' => '员工ID',
+            'material_in_ordertime' => '入库时间',
+            'material_in_orderremark' => '入库备注',
         ];
     }
 

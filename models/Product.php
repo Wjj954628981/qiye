@@ -51,9 +51,9 @@ class Product extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'product_id' => 'Product ID',
+            'product_id' => '产品ID',
             'product_category_id' => 'Product Category ID',
-            'product_name' => 'Product Name',
+            'product_name' => '产品名称',
             'product_price' => 'Product Price',
         ];
     }

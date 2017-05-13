@@ -6,9 +6,9 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model app\models\MaterialWarehouseOutOrder */
 
-$this->title = 'Create Material Warehouse Out Order';
-$this->params['breadcrumbs'][] = ['label' => 'Material Warehouse Out Orders', 'url' => ['index']];
-$this->params['breadcrumbs'][] = $this->title;
+$this->title = '创建材料出库单';
+// $this->params['breadcrumbs'][] = ['label' => 'Material Warehouse Out Orders', 'url' => ['index']];
+// $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="material-warehouse-out-order-create">
 

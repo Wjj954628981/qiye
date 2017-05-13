@@ -44,10 +44,10 @@ class ProductWarehouseOutOrder extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'product_out_orderid' => 'Product Out Orderid',
-            'employee_id' => 'Employee ID',
-            'product_out_ordertime' => 'Product Out Ordertime',
-            'product_out_orderremark' => 'Product Out Orderremark',
+            'product_out_orderid' => '产品出库单ID',
+            'employee_id' => '员工ID',
+            'product_out_ordertime' => '出库时间',
+            'product_out_orderremark' => '出库备注',
         ];
     }
 

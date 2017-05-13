@@ -48,13 +48,13 @@ class Orderlist extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'order_id' => 'Order ID',
-            'customer_id' => 'Customer ID',
-            'purchase_time' => 'Purchase Time',
-            'duetime' => 'Duetime',
-            'person_name' => 'Person Name',
-            'telephone' => 'Telephone',
-            'order_state' => 'Order State',
+            'order_id' => '订单ID',
+            'customer_id' => '顾客ID',
+            'purchase_time' => '下单时间',
+            'duetime' => '截止日期',
+            'person_name' => '用户名',
+            'telephone' => '联系',
+            'order_state' => '订单状态',
         ];
     }
 

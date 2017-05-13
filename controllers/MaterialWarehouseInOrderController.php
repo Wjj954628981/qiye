@@ -5,6 +5,8 @@ namespace app\controllers;
 use Yii;
 use app\models\MaterialWarehouseInOrder;
 use app\models\SearchMaterialWarehouseInOrder;
+use app\models\ProductWarehouseInOrder;
+use app\models\SearchProductWarehouseInOrder;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -35,12 +37,20 @@ class MaterialWarehouseInOrderController extends Controller
      */
     public function actionIndex()
     {
-        $searchModel = new SearchMaterialWarehouseInOrder();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $searchModelMaterialWarehouseInOrder = new SearchMaterialWarehouseInOrder();
+        $dataProviderMaterialWarehouseInOrder = $searchModelMaterialWarehouseInOrder->search(Yii::$app->request->queryParams);
+        $dataProviderMaterialWarehouseInOrder->Pagination->defaultPageSize = 10;
+
+        $searchModelProductWarehouseInOrder = new SearchProductWarehouseInOrder();
+        $dataProviderProductWarehouseInOrder = $searchModelProductWarehouseInOrder->search(Yii::$app->request->queryParams);
+        $dataProviderProductWarehouseInOrder->Pagination->defaultPageSize = 10;
 
         return $this->render('index', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
+            'searchModelMaterialWarehouseInOrder' => $searchModelMaterialWarehouseInOrder,
+            'dataProviderMaterialWarehouseInOrder' => $dataProviderMaterialWarehouseInOrder,
+
+            'searchModelProductWarehouseInOrder' => $searchModelProductWarehouseInOrder,
+            'dataProviderProductWarehouseInOrder' => $dataProviderProductWarehouseInOrder,
         ]);
     }
 

@@ -8,7 +8,7 @@ use yii\grid\GridView;
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
 $this->title = '材料出库单';
-$this->params['breadcrumbs'][] = $this->title;
+// $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="material-warehouse-out-order-index">
 
@@ -16,11 +16,13 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
-        <?= Html::a('创建材料出库单', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('创建材料出库单', ['create'], ['class' => 'btn btn-primary']) ?>
+
     </p>
+    <hr>
     <?= GridView::widget([
-        'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
+        'dataProvider' => $dataProviderMaterialWarehouseOutOrder,
+        'filterModel' => $searchModelMaterialWarehouseOutOrder,
         'columns' => [
             'material_out_orderid',
             'employee_id',
@@ -70,3 +72,44 @@ $this->params['breadcrumbs'][] = $this->title;
         'showOnEmpty'=>false,
     ]); ?>
 </div>
+
+<div class="product-warehouse-out-order-index">
+
+    <h1>产品出库单</h1>
+    <p>
+        <?= Html::a('创建产品出库单', ['product-warehouse-out-order/create'], ['class' => 'btn btn-primary']) ?>
+    </p>
+    <?= GridView::widget([
+        'dataProvider' => $dataProviderProductWarehouseOutOrder,
+        'filterModel' => $searchModelProductWarehouseOutOrder,
+        'columns' => [
+            'product_out_orderid',
+            'employee_id',
+            'product_out_ordertime:datetime',
+            'product_out_orderremark',
+
+            [
+                'header' => "操作",
+                'class' => 'yii\grid\ActionColumn',
+                'template' => '{view} {update}',
+                'urlCreator' => function ($action, $model, $key, $index) {
+                    switch($action)
+                    {
+                        case 'view':
+                            return 'index.php?r=product-warehouse-out-order%2Fview&id=' . $model->product_out_orderid;
+                            break;
+                        case 'update':
+                            return 'index.php?r=product-warehouse-out-order%2Fupdate&id=' . $model->product_out_orderid;
+                            break;
+                    }
+
+                },
+            ],
+        ],
+        'emptyText'=>'当前无数据',
+        'emptyTextOptions'=>['style'=>'color:red;font-weight:bold'],
+        'layout'=>"{items}\n{pager}",
+        'showOnEmpty'=>false,
+    ]); ?>
+</div>
+

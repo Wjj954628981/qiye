@@ -121,4 +121,39 @@ class ProcessController extends Controller
             throw new NotFoundHttpException('The requested page does not exist.');
         }
     }
+
+    public function findProcess($product_id, $product_count){
+        $process_id = Yii::$app->db->createCommand("select process_id from product_process where product_id=: product_id")
+                        ->bindValue(':product_id', $product_id)
+                        ->queryOne();
+
+        $material = processMaterial($product_id);
+
+        Yii::app()->db->createCommand()->insert('process_getorder',  array("process_id" => $process_id));
+        $process_getorderid = Yii::app()->db->createCommand("select process_getorderid from process_getorder order by process_getorderid desc")
+                ->queryOne();
+
+        for($i = 0; $i < count($material); $i++){
+            $material_count = material[$i]->material_count;
+            $material_id = material[$i]->material_id;
+            Yii::app()->db->createCommand()->insert('process_getorder_detail',   
+                array(  
+                'material_id' => $material_id,
+                'process_getorderid' => $process_getorderid,
+                'material_count' => $material_count * $product_count
+            ));
+        }
+    }
+
+    public function processMaterial($product_id){
+        $process_getorderid = Yii::app()->db->createCommand("select process_getorderid from process_getorder where process_id=: process_id order by process_getordertime desc")
+            ->bindValue(":process_id", $process_id)
+            ->queryOne();
+
+        $material = Yii::app()->db->createCommand("select material_id, material_count from process_getorder_detail where process_getorderid=: process_getorderid")
+            ->bindValue(":process_getorderid", $process_getorderid)
+            ->queryOne();
+
+        return $this->render('processMaterial', ["material" => $material]);
+    }
 }

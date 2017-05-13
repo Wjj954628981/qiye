@@ -9,7 +9,7 @@ use yii\bootstrap\ActiveForm;
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
 $this->title = '仓库';
-$this->params['breadcrumbs'][] = $this->title;
+// $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="warehouse-index">
 
@@ -28,8 +28,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 <div class="col-md-3">
                     <?= $form->field($model, 'item_name')->label('名称')?>
                 </div>
-                <div class="col-md-1"></div>
-                <div class="form-group col-md-4">
+                <div class="col-md-4">
                     <div style="height:25px;"></div>
                     <?= Html::submitButton('查询', ['class' => 'btn btn-primary']) ?>
                 </div>
@@ -44,55 +43,80 @@ $this->params['breadcrumbs'][] = $this->title;
             'dataProvider' => $dataProviderWarehouse,
             // 'filterModel'=>$searchModelWarehouse,
             'columns' => [
-                'warehouse_id',
-                'warehouse_name',
-                'location',
-                'max',
+                ['attribute' => 'warehouse_id',
+                'enableSorting' => false],
+                ['attribute' => 'warehouse_name',
+                'enableSorting' => false],
+                ['attribute' => 'location',
+                'enableSorting' => false],
+                ['attribute' => 'max',
+                'enableSorting' => false],
                 [
                     'class' => 'yii\grid\ActionColumn',
                     'template'=>'{update}{delete}',
                 ],
             ],
             'emptyText'=>'当前无数据',
-            'emptyTextOptions'=>['style'=>'color:red;font-weight:bold'],
+            'emptyTextOptions'=>['style'=>'font-weight:bold'],
             'layout'=>"{items}\n{pager}",
             'showOnEmpty'=>false,
         ]); ?>
         <hr>
-        <div class="row">
-            <div class="col-md-6">
+        <!-- <div class="row"> -->
+            <!-- <div class="col-md-6"> -->
             <h2 class="text-center text-primary">物料信息</h2>
                 <?= GridView::widget([
                     'dataProvider' => $dataProviderWarehouseMaterial,
                     // 'filterModel'=>$searchModelWarehouseMaterial,
                     'columns' => [
-                        'warehouse_id',
-                        'material_id',
-                        'material_count',
+                        // 'material_id',
+                        [
+                            'attribute' => 'warehouse_id',
+                            'enableSorting' => false
+                        ],
+                        [
+                            'attribute' => 'material_count',
+                            'enableSorting' => false
+                        ],
+                        [
+                            'attribute' => 'material_name',
+                            'value' => 'material.material_name'
+                        ]
                     ],
                     'emptyText'=>'当前无数据',
-                    'emptyTextOptions'=>['style'=>'color:red;font-weight:bold'],
+                    'emptyTextOptions'=>['style'=>'font-weight:bold'],
                     'layout'=>"{items}\n{pager}",
                     'showOnEmpty'=>false,
                 ]); ?>
-            </div>
-            <div class="col-md-6">
+            <!-- </div> -->
+            <hr>
+            <!-- <div class="col-md-6"> -->
             <h2 class="text-center text-primary">货品信息</h2>
                 <?= GridView::widget([
                     'dataProvider' => $dataProviderWarehouseProduct,
                     // 'filterModel'=>$searchModelWarehouseProduct,
                     'columns' => [
-                        'warehouse_id',
-                        'product_id',
-                        'product_count',
+                        [
+                            'attribute' => 'warehouse_id',
+                            'enableSorting' => false
+                        ],
+                        // 'product_id',
+                        [
+                            'attribute' => 'product_count',
+                            'enableSorting' => false
+                        ],
+                        [
+                            'attribute' => 'product_name',
+                            'value' => 'product.product_name'
+                        ]
                     ],
                     'emptyText'=>'当前无数据',
-                    'emptyTextOptions'=>['style'=>'color:red;font-weight:bold'],
+                    'emptyTextOptions'=>['style'=>'font-weight:bold'],
                     'layout'=>"{items}\n{pager}",
                     'showOnEmpty'=>false,
                 ]); ?>
-            </div>
-        </div>
+            <!-- </div> -->
+        <!-- </div> -->
     </div>
 </div>
 

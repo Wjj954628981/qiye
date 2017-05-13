@@ -46,10 +46,10 @@ class ProductWarehouseIn extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'product_id' => 'Product ID',
-            'product_in_orderid' => 'Product In Orderid',
-            'warehouse_id' => 'Warehouse ID',
-            'product_in_count' => 'Product In Count',
+            'product_id' => '产品ID',
+            'product_in_orderid' => '产品入库单ID',
+            'warehouse_id' => '仓库ID',
+            'product_in_count' => '产品数量',
         ];
     }
 

@@ -44,10 +44,10 @@ class ProductWarehouseInOrder extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'product_in_orderid' => 'Product In Orderid',
-            'employee_id' => 'Employee ID',
-            'product_in_ordertime' => 'Product In Ordertime',
-            'product_in_orderremark' => 'Product In Orderremark',
+            'product_in_orderid' => '产品入库单ID',
+            'employee_id' => '员工ID',
+            'product_in_ordertime' => '入库时间',
+            'product_in_orderremark' => '入库备注',
         ];
     }
 

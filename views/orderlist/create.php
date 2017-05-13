@@ -6,9 +6,9 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model app\models\Orderlist */
 
-$this->title = 'Create Orderlist';
-$this->params['breadcrumbs'][] = ['label' => 'Orderlists', 'url' => ['index']];
-$this->params['breadcrumbs'][] = $this->title;
+$this->title = '新建订单';
+// $this->params['breadcrumbs'][] = ['label' => 'Orderlists', 'url' => ['index']];
+// $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="orderlist-create">
 

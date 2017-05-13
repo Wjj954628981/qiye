@@ -125,4 +125,12 @@ class OrderProductController extends Controller
             throw new NotFoundHttpException('The requested page does not exist.');
         }
     }
+
+    #订单分解
+    public function decompose(){
+        $keys = Yii::$app->request->post('keys');
+        foreach ($keys as $key) {
+            $model = self::find()->where(['order_id'=>$key]);
+        }
+    }
 }

@@ -66,4 +66,5 @@ class SearchWarehouseMaterial extends WarehouseMaterial
 
         return $dataProvider;
     }
+
 }

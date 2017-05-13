@@ -5,6 +5,8 @@ namespace app\controllers;
 use Yii;
 use app\models\MaterialWarehouseOutOrder;
 use app\models\SearchMaterialWarehouseOutOrder;
+use app\models\ProductWarehouseOutOrder;
+use app\models\SearchProductWarehouseOutOrder;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -35,13 +37,20 @@ class MaterialWarehouseOutOrderController extends Controller
      */
     public function actionIndex()
     {
-        $searchModel = new SearchMaterialWarehouseOutOrder();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-        $dataProvider->Pagination->defaultPageSize = 10;
+        $searchModelMaterialWarehouseOutOrder = new SearchMaterialWarehouseOutOrder();
+        $dataProviderMaterialWarehouseOutOrder = $searchModelMaterialWarehouseOutOrder->search(Yii::$app->request->queryParams);
+        $dataProviderMaterialWarehouseOutOrder->Pagination->defaultPageSize = 10;
+
+        $searchModelProductWarehouseOutOrder = new SearchProductWarehouseOutOrder();
+        $dataProviderProductWarehouseOutOrder = $searchModelProductWarehouseOutOrder->search(Yii::$app->request->queryParams);
+        $dataProviderProductWarehouseOutOrder->Pagination->defaultPageSize = 10;
 
         return $this->render('index', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
+            'searchModelMaterialWarehouseOutOrder' => $searchModelMaterialWarehouseOutOrder,
+            'dataProviderMaterialWarehouseOutOrder' => $dataProviderMaterialWarehouseOutOrder,
+
+            'searchModelProductWarehouseOutOrder' => $searchModelProductWarehouseOutOrder,
+            'dataProviderProductWarehouseOutOrder' => $dataProviderProductWarehouseOutOrder,
         ]);
     }
 
