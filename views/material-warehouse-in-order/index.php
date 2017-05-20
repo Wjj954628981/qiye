@@ -30,7 +30,7 @@ $this->title = '材料入库单';
             [
                 'header' => "操作",
                 'class' => 'yii\grid\ActionColumn',
-                'template' => '{view} {update}',
+                'template' => '{view}',
             ]
         ],
         'emptyText'=>'当前无数据',
@@ -58,16 +58,16 @@ $this->title = '材料入库单';
             [
                 'header' => "操作",
                 'class' => 'yii\grid\ActionColumn',
-                'template' => '{view} {update}',
+                'template' => '{view}',
                 'urlCreator' => function ($action, $model, $key, $index) {
                     switch($action)
                     {
                         case 'view':
                             return 'index.php?r=product-warehouse-in-order%2Fview&id=' . $model->product_in_orderid;
                             break;
-                        case 'update':
-                            return 'index.php?r=product-warehouse-in-order%2Fupdate&id=' . $model->product_in_orderid;
-                            break;
+                        // case 'update':
+                        //     return 'index.php?r=product-warehouse-in-order%2Fupdate&id=' . $model->product_in_orderid;
+                        //     break;
                     }
 
                 },

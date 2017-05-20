@@ -122,12 +122,24 @@ class ProcessController extends Controller
         }
     }
 
+
+    public function findMaterial($product_id){
+        $sql = "SELECT m.material_id FROM material AS m,product_material AS pm,product AS p 
+                    WHERE (
+                            p.product_id=: productid AND
+                            p.product_id = pm.product_id AND
+                            m.material_id = pm.material_id  )";
+        $material = yii::$app->db->createCommand($sql)->bindValue(':productid', $product_id)->queryAll();
+        
+        return $material;
+    }
+
     public function findProcess($product_id, $product_count){
         $process_id = Yii::$app->db->createCommand("select process_id from product_process where product_id=: product_id")
                         ->bindValue(':product_id', $product_id)
                         ->queryOne();
 
-        $material = processMaterial($product_id);
+        $material = findMaterial($product_id);
 
         Yii::app()->db->createCommand()->insert('process_getorder',  array("process_id" => $process_id));
         $process_getorderid = Yii::app()->db->createCommand("select process_getorderid from process_getorder order by process_getorderid desc")
@@ -145,7 +157,7 @@ class ProcessController extends Controller
         }
     }
 
-    public function processMaterial($product_id){
+    public function processMaterial($process_id){
         $process_getorderid = Yii::app()->db->createCommand("select process_getorderid from process_getorder where process_id=: process_id order by process_getordertime desc")
             ->bindValue(":process_id", $process_id)
             ->queryOne();

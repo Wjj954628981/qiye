@@ -39,11 +39,11 @@ class MaterialWarehouseInOrderController extends Controller
     {
         $searchModelMaterialWarehouseInOrder = new SearchMaterialWarehouseInOrder();
         $dataProviderMaterialWarehouseInOrder = $searchModelMaterialWarehouseInOrder->search(Yii::$app->request->queryParams);
-        $dataProviderMaterialWarehouseInOrder->Pagination->defaultPageSize = 10;
+        $dataProviderMaterialWarehouseInOrder->Pagination->defaultPageSize = 5;
 
         $searchModelProductWarehouseInOrder = new SearchProductWarehouseInOrder();
         $dataProviderProductWarehouseInOrder = $searchModelProductWarehouseInOrder->search(Yii::$app->request->queryParams);
-        $dataProviderProductWarehouseInOrder->Pagination->defaultPageSize = 10;
+        $dataProviderProductWarehouseInOrder->Pagination->defaultPageSize = 5;
 
         return $this->render('index', [
             'searchModelMaterialWarehouseInOrder' => $searchModelMaterialWarehouseInOrder,

@@ -114,14 +114,16 @@ class SiteController extends Controller
         ]);
     }
 
-    /**
-     * Displays about page.
-     *
-     * @return string
-     */
     public function actionAbout()
     {
-        return $this->render('about');
+        $keys=Yii::$app->request->post('keys');
+        //对数据处理
+        return sizeof($keys);
+    }
+
+    public function actionShow($data)
+    {
+        return $this->render('show',['data'=>$data]);
     }
 
     /**

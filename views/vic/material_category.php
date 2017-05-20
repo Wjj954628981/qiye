@@ -6,6 +6,9 @@ $dbpassword = '1996wangjiajie.';
 $dbname = 'yii_qiye';
 $connection = mysqli_connect($dbhost,$dbusr,$dbpassword,$dbname);
 
+
+use yii\bootstrap\Nav;
+use yii\bootstrap\NavBar;
 /* @var $this \yii\web\View */
 /* @var $content string */
 
@@ -23,8 +26,8 @@ if(mysqli_connect_errno()){
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-param" content="_csrf">
     <meta name="csrf-token" content="Ri1BVWNDeFM/b3QnMiQAHQBuch8zMQwwfml0OSF7Sj48fx5kFxQxCg==">
-    <title>Material Categories</title>
-    <link href="/qiye/web/assets/6b77df6a/css/bootstrap.css" rel="stylesheet">
+    <title>物料种类</title>
+    <link href="/qiye/web/assets/65634dd5/css/bootstrap.css" rel="stylesheet">
 <link href="/qiye/web/css/site.css" rel="stylesheet"></head>
 <body>
 
@@ -32,22 +35,22 @@ if(mysqli_connect_errno()){
     <nav id="w1" class="navbar-inverse navbar-fixed-top navbar" role="navigation"><div class="container"><div class="navbar-header"><button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#w1-collapse"><span class="sr-only">Toggle navigation</span>
 <span class="icon-bar"></span>
 <span class="icon-bar"></span>
-<span class="icon-bar"></span></button><a class="navbar-brand" href="/qiye/web/index.php">My Company</a></div><div id="w1-collapse" class="collapse navbar-collapse"><ul id="w2" class="navbar-nav navbar-right nav"><li><a href="/qiye/web/index.php?r=site%2Findex">Home</a></li>
+<span class="icon-bar"></span></button><a class="navbar-brand" href="/qiye/web/index.php">光电码盘管理系统</a></div><div id="w1-collapse" class="collapse navbar-collapse"><ul id="w2" class="navbar-nav navbar-right nav"><li><a href="/qiye/web/index.php?r=site%2Findex">Home</a></li>
 <li><a href="/qiye/web/index.php?r=site%2Fabout">About</a></li>
 <li><a href="/qiye/web/index.php?r=site%2Fcontact">Contact</a></li>
 <li><a href="/qiye/web/index.php?r=site%2Flogin">Login</a></li></ul></div></div></nav>
     <div class="container">
-        <ul class="breadcrumb"><li><a href="/qiye/web/index.php">Home</a></li>
-<li class="active">Material Categories</li>
+        <!-- <ul class="breadcrumb"><li><a href="/qiye/web/index.php">Home</a></li>
+<li class="active">Material Categories</li> -->
 </ul>        <div class="material-category-index">
 
-    <h1>Material Categories</h1>
+    <h1>物料种类</h1>
     
     <p>
-        <a class="btn btn-success" href="/qiye/web/index.php?r=material-category%2Fcreate">Create Material Category</a>    </p>
-    <div id="w0" class="grid-view"><div class="summary">Showing <b>1-20</b> of <b>20</b> items.</div>
+        <a class="btn btn-primary" href="/qiye/web/index.php?r=material-category%2Fcreate">新建物料种类</a>    </p>
+    <!-- <div id="w0" class="grid-view"><div class="summary">Showing <b>1-20</b> of <b>20</b> items.</div> -->
 <table class="table table-striped table-bordered"><thead>
-<tr><th>#</th><th><a href="/qiye/web/index.php?r=material-category%2Findex&amp;sort=material_category_id" data-sort="material_category_id">Material Category ID</a></th><th><a href="/qiye/web/index.php?r=material-category%2Findex&amp;sort=material_category_name" data-sort="material_category_name">Material Category Name</a></th><th class="action-column">&nbsp;</th></tr><tr id="w0-filters" class="filters"><td>&nbsp;</td><td><input type="text" class="form-control" name="SearchMaterialCategory[material_category_id]"></td><td><input type="text" class="form-control" name="SearchMaterialCategory[material_category_name]"></td><td>&nbsp;</td></tr>
+<tr><th>序号</th><th>物料种类ID</th><th>物料种类名称</th><th>操作</th></tr><!-- <tr id="w0-filters" class="filters"><td>&nbsp;</td><td><input type="text" class="form-control" name="SearchMaterialCategory[material_category_id]"></td><td><input type="text" class="form-control" name="SearchMaterialCategory[material_category_name]"></td><td>&nbsp;</td></tr> -->
 </thead>
 
 
@@ -86,7 +89,7 @@ $address = "/qiye/views/vic/material_detail.php?material_category_id=".$material
 $address = "/qiye/views/vic/material_category.php?material_category_id=".$material_category_id;    
 }
 
-$input = "<tr data-key='0'><td>$i</td><td>{$subject['material_category_id']}   <a class='btn btn-success' href = '$address'>详细</a> </td><td>{$subject['material_category_name']}</td><td><a href='/qiye/web/index.php?r=material-category%2Fview&amp;id=0' title='View' aria-label='View' data-pjax='0'><span class='glyphicon glyphicon-eye-open'></span></a> <a href='/qiye/web/index.php?r=material-category%2Fupdate&amp;id=0' title='Update' aria-label='Update' data-pjax='0'><span class='glyphicon glyphicon-pencil'></span></a> <a href='/qiye/web/index.php?r=material-category%2Fdelete&amp;id=0' title='Delete' aria-label='Delete' data-pjax='0' data-confirm='Are you sure you want to delete this item?'' data-method='post'><span class='glyphicon glyphicon-trash'></span></a></td></tr>";
+$input = "<tr data-key='0'><td>$i</td><td>{$subject['material_category_id']}   <a class='btn btn-primary' href = '$address'>详细</a> </td><td>{$subject['material_category_name']}</td><td><a href='/qiye/web/index.php?r=material-category%2Fview&amp;id=0' title='View' aria-label='View' data-pjax='0'><span class='glyphicon glyphicon-eye-open'></span></a> <a href='/qiye/web/index.php?r=material-category%2Fupdate&amp;id=0' title='Update' aria-label='Update' data-pjax='0'><span class='glyphicon glyphicon-pencil'></span></a> <a href='/qiye/web/index.php?r=material-category%2Fdelete&amp;id=0' title='Delete' aria-label='Delete' data-pjax='0' data-confirm='Are you sure you want to delete this item?'' data-method='post'><span class='glyphicon glyphicon-trash'></span></a></td></tr>";
 
 echo strip_tags($input,'<tr><td><a><span>');
 $i++;
@@ -135,7 +138,7 @@ $address = "/qiye/views/vic/material_detail.php?material_category_id=".$material
 $address = "/qiye/views/vic/material_category.php?material_category_id=".$material_category_ic_checkson;    
 }
 
-$input = "<tr data-key='0'><td>$i</td><td>{$subject_son['material_category_id']}  <a class='btn btn-success' href = '$address'>详细</a> </td><td>{$subject_son['material_name']}</td><td><a href='/qiye/web/index.php?r=material-category%2Fview&amp;id=0' title='View' aria-label='View' data-pjax='0'><span class='glyphicon glyphicon-eye-open'></span></a> <a href='/qiye/web/index.php?r=material-category%2Fupdate&amp;id=0' title='Update' aria-label='Update' data-pjax='0'><span class='glyphicon glyphicon-pencil'></span></a> <a href='/qiye/web/index.php?r=material-category%2Fdelete&amp;id=0' title='Delete' aria-label='Delete' data-pjax='0' data-confirm='Are you sure you want to delete this item?'' data-method='post'><span class='glyphicon glyphicon-trash'></span></a></td></tr>";
+$input = "<tr data-key='0'><td>$i</td><td>{$subject_son['material_category_id']}  <a class='btn btn-primary' href = '$address'>详细</a> </td><td>{$subject_son['material_name']}</td><td><a href='/qiye/web/index.php?r=material-category%2Fview&amp;id=0' title='View' aria-label='View' data-pjax='0'><span class='glyphicon glyphicon-eye-open'></span></a> <a href='/qiye/web/index.php?r=material-category%2Fupdate&amp;id=0' title='Update' aria-label='Update' data-pjax='0'><span class='glyphicon glyphicon-pencil'></span></a> <a href='/qiye/web/index.php?r=material-category%2Fdelete&amp;id=0' title='Delete' aria-label='Delete' data-pjax='0' data-confirm='Are you sure you want to delete this item?'' data-method='post'><span class='glyphicon glyphicon-trash'></span></a></td></tr>";
 
 echo strip_tags($input,'<tr><td><a><span>');
 $i++;
@@ -160,13 +163,13 @@ mysqli_free_result($result_test1);
     </div>
 </div>
 
-<footer class="footer">
+<!-- <footer class="footer">
     <div class="container">
         <p class="pull-left">&copy; My Company 2017</p>
 
         <p class="pull-right">Powered by <a href="http://www.yiiframework.com/" rel="external">Yii Framework</a></p>
     </div>
-</footer>
+</footer> -->
 
 <div id="yii-debug-toolbar" data-url="/qiye/web/index.php?r=debug%2Fdefault%2Ftoolbar&amp;tag=5912b5bd15986" style="display:none" class="yii-debug-toolbar-bottom"></div><style>
 #yii-debug-toolbar-logo {
@@ -802,10 +805,10 @@ a.yii-debug-toolbar__label:focus {
         proxied.apply(this, Array.prototype.slice.call(arguments));
     };
 
-})();</script><script src="/qiye/web/assets/659d75dc/jquery.js"></script>
-<script src="/qiye/web/assets/abd27537/yii.js"></script>
-<script src="/qiye/web/assets/abd27537/yii.gridView.js"></script>
-<script src="/qiye/web/assets/6b77df6a/js/bootstrap.js"></script>
+})();</script><script src="/qiye/web/assets/33765f41/jquery.js"></script>
+<script src="/qiye/web/assets/b157a115/yii.js"></script>
+<script src="/qiye/web/assets/b157a115/yii.gridView.js"></script>
+<script src="/qiye/web/assets/65634dd5/js/bootstrap.js"></script>
 <script type="text/javascript">jQuery(document).ready(function () {
 jQuery('#w0').yiiGridView({"filterUrl":"\/\/qiye\/web\/index.php?r=material-category","filterSelector":"#w0-filters input, #w0-filters select"});
 });</script></body>

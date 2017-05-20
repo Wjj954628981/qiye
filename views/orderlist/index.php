@@ -24,6 +24,8 @@ $this->title = '订单列表';
             <button class="btn btn-primary" id="btndec">分解订单</button>
         </div>
     </div>
+    <!-- <button onclick="alert('hello');window.location='http://www.baidu.com'">hello</button> -->
+    <!-- <button onclick="alert('hello');window.location='index.php?r=site/login'">hello</button> -->
     <hr>
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
@@ -71,9 +73,15 @@ $this->title = '订单列表';
         $("#btndec").click(function(){
             var keys = $("#grid").yiiGridView("getSelectedRows");
             alert(keys);
-            $.post("index.php?r=OrderlistController/decompose",
+            $.post("?r=site/about",
             {
                 keys:keys
+            },
+            function(data,status){
+                alert(data + status);
+                if(status=="success"){
+                    location.href="index.php?r=site/show&data="+data;
+                }
             });
         });
     ');
