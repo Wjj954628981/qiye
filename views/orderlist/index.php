@@ -72,7 +72,6 @@ $this->title = '订单列表';
         console.log("in orderlist index");
         $("#btndec").click(function(){
             var keys = $("#grid").yiiGridView("getSelectedRows");
-            alert(keys);
             $.post("?r=site/about",
             {
                 keys:keys

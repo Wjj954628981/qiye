@@ -43,9 +43,9 @@ class ProcessGetorderDetail extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'process_getorderid' => 'Process Getorderid',
-            'material_id' => 'Material ID',
-            'material_count' => 'Material Count',
+            'process_getorderid' => '领料单ID',
+            'material_id' => '材料ID',
+            'material_count' => '材料数量',
         ];
     }
 

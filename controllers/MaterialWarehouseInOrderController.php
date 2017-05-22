@@ -73,15 +73,7 @@ class MaterialWarehouseInOrderController extends Controller
      */
     public function actionCreate()
     {
-        $model = new MaterialWarehouseInOrder();
-
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->material_in_orderid]);
-        } else {
-            return $this->render('create', [
-                'model' => $model,
-            ]);
-        }
+        return $this->render('create');
     }
 
     /**
@@ -104,19 +96,6 @@ class MaterialWarehouseInOrderController extends Controller
     }
 
     /**
-     * Deletes an existing MaterialWarehouseInOrder model.
-     * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param integer $id
-     * @return mixed
-     */
-    public function actionDelete($id)
-    {
-        $this->findModel($id)->delete();
-
-        return $this->redirect(['index']);
-    }
-
-    /**
      * Finds the MaterialWarehouseInOrder model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
@@ -130,5 +109,36 @@ class MaterialWarehouseInOrderController extends Controller
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
         }
+    }
+
+
+
+    public function actionAdd(){
+        $key=Yii::$app->request->post('key');
+        $cookies = Yii::$app->response->cookies;
+ 
+        $cookies->add(new \yii\web\Cookie([
+            'name' => 'message'.$key,
+            'value' => 0,
+            'expire'=>time()+360
+        ]));
+
+        return $this->redirect(['create']);
+    }
+
+    public function actionDelete($id){
+        $cookies = Yii::$app->request->cookies;
+
+        $cookies->remove('message'.$id);
+    }
+
+    public function actionChange($num, $id){
+        $cookies = Yii::$app->response->cookies;
+ 
+        $cookies->add(new \yii\web\Cookie([
+            'name' => 'message'.$id,
+            'value' => $num,
+            'expire'=>time()+360
+        ]));
     }
 }

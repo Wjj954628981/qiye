@@ -14,11 +14,9 @@ $this->title = '材料出库单';
 
     <h1><?= Html::encode($this->title) ?></h1>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
-
-    <p>
-        <?= Html::a('创建材料出库单', ['create'], ['class' => 'btn btn-primary']) ?>
-
-    </p>
+    <label>领料单ID</label>
+    <input type="text" id="process_getorderid">
+    <input type="button" class="btn btn-primary" id="create" value="创建材料出库单">
     <hr>
     <?= GridView::widget([
         'dataProvider' => $dataProviderMaterialWarehouseOutOrder,
@@ -34,7 +32,7 @@ $this->title = '材料出库单';
             [
                 'header' => "操作",
                 'class' => 'yii\grid\ActionColumn',
-                'template' => '{view} {update}'
+                'template' => '{view} '
                 // 'buttons' = [
                 //     // 下面代码来自于 yii\grid\ActionColumn 简单修改了下
                 //     'user-view' => function ($url, $model, $key) {
@@ -113,3 +111,14 @@ $this->title = '材料出库单';
     ]); ?>
 </div>
 
+
+<?php
+$this->registerJs(<<<JS
+    var process_getorderid = $("#process_getorderid").val();
+    $(".btn").click(function(e){
+        alert(process_getorderid);
+        window.location="?r=material-warehouse-out-order/create&process_getorderid="+process_getorderid;
+    });
+JS
+);
+?>

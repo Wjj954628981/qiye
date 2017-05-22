@@ -71,17 +71,11 @@ class MaterialWarehouseOutOrderController extends Controller
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
-    public function actionCreate()
+    public function actionCreate($process_getorderid)
     {
-        $model = new MaterialWarehouseOutOrder();
-
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->material_out_orderid]);
-        } else {
             return $this->render('create', [
-                'model' => $model,
+                'process_getorderid' => $process_getorderid,
             ]);
-        }
     }
 
     /**
@@ -130,5 +124,13 @@ class MaterialWarehouseOutOrderController extends Controller
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
         }
+    }
+
+    public function actionAdd(){
+        $employee_id=Yii::$app->request->post('employee_id');
+        $material_outorder_remark=Yii::$app->request->post('material_outorder_remark');
+        $process_getorderid=Yii::$app->request->post('process_getorderid');
+
+
     }
 }

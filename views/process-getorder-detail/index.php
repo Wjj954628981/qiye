@@ -7,8 +7,8 @@ use yii\grid\GridView;
 /* @var $searchModel app\models\SearchProcessGetorderDetail */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Process Getorder Details';
-$this->params['breadcrumbs'][] = $this->title;
+$this->title = '领料单详情';
+// $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="process-getorder-detail-index">
 
@@ -30,5 +30,9 @@ $this->params['breadcrumbs'][] = $this->title;
 
             ['class' => 'yii\grid\ActionColumn'],
         ],
+        'emptyText'=>'当前无数据',
+        'emptyTextOptions'=>['style'=>'color:red;font-weight:bold'],
+        'layout'=>"{items}\n{pager}",
+        'showOnEmpty'=>false,
     ]); ?>
 </div>
