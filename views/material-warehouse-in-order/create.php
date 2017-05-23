@@ -29,39 +29,46 @@ use yii\grid\GridView;
 	// $language = $cookies->get('message0');
 ?>
 
-<div class="material-warehouse-in-order-form">
-
-	<?= GridView::widget([
-        'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
-        'columns' => [
-            'material_id',
-            'material_category_id',
-            'material_name',
-            [
-                'header' => "操作",
-                'class' => 'yii\grid\ActionColumn',
-                'template' => '{add}',
-                'buttons'=>[
-                	'add'=>function($url, $model, $key){
-                		$options = [
-                        'title' => Yii::t('yii', 'Add'),
-                        'aria-label' => Yii::t('yii', 'Add'),
-                        'data-pjax' => '0',
-                        'id' => $key,
-                        'class' => 'btn-a',
-	                    ];
-	                    return Html::a('<span class="glyphicon glyphicon-plus"></span>', "", $options);
-       	         	}
-                ]
-            ]	
+<?= GridView::widget([
+    'dataProvider' => $dataProvider,
+    'filterModel' => $searchModel,
+    'columns' => [
+        [
+        	'attribute'=>'material_id',
+        	'enableSorting'=>false
         ],
-        'emptyText'=>'当前无数据',
-        'emptyTextOptions'=>['style'=>'color:red;font-weight:bold'],
-        'layout'=>"{items}\n{pager}",
-        'showOnEmpty'=>false,
-    ]); ?>
-</div>
+        [
+        	'attribute'=>'material_category_id',
+        	'enableSorting'=>false
+        ],
+        [
+        	'attribute'=>'material_name',
+        	'enableSorting'=>false
+        ],
+        [
+            'header' => "操作",
+            'class' => 'yii\grid\ActionColumn',
+            'template' => '{add}',
+            'buttons'=>[
+            	'add'=>function($url, $model, $key){
+            		$options = [
+                    'title' => Yii::t('yii', 'Add'),
+                    'aria-label' => Yii::t('yii', 'Add'),
+                    'data-pjax' => '0',
+                    'id' => $key,
+                    'class' => 'btn-a',
+                    ];
+                    return Html::a('<span class="glyphicon glyphicon-plus"></span>', "", $options);
+   	         	}
+            ]
+        ]	
+    ],
+    'emptyText'=>'当前无数据',
+    'emptyTextOptions'=>['style'=>'color:red;font-weight:bold'],
+    'layout'=>"{items}\n{pager}",
+    'showOnEmpty'=>false,
+]); ?>
+
 
 
 
@@ -75,22 +82,34 @@ use yii\grid\GridView;
 </thead>
 <tbody>
 	<?php
+	if(count($messages)==0){
+		echo '<tr><th>当前无数据</th></tr>';
+	}
 	foreach ($messages as $message) {
 	?>
 	<tr>
 	<?php
-		echo '<th>'.$message['id'].'</th>';
-		echo '<th><input type="text" value="'.$message['num'].'"></th>';
-		echo '<th> <input type="button" class="btn btn-primary" value="确认" id="confirm-'.$message['id'].'"> <input type="button" class="btn btn-primary" value="删除" id="delete-'.$message['id'].'"> </th>';
+		echo '<th>'.Material::find()->where(['material_id'=>$message['id']])->one()['material_name'].'</th>';
+		echo '<th><input type="text" value="'.$message['num'].'" id="num'.$message['id'].'"></th>';
+		echo '<th> <input type="button" class="btn btn-primary btn-button" value="确认" id="confirm-'.$message['id'].'"> <input type="button" class="btn btn-primary btn-button" value="删除" id="delete-'.$message['id'].'"> </th>';
 	?>
 	</tr>
 	<?php	
 	}
 	?>
 </tbody>
-
 </table>
 
+<label>负责人ID：</label>
+<input type="text" id="employee_id">
+<hr>
+<label>仓库ID：</label>
+<input type="text" id="warehouse_id">
+<hr>
+
+<textarea class="form-control" placeholder="备注区域" id="remark"></textarea>
+<hr>
+<input type="button" value="确定创建入库单" class="btn btn-primary btn-lg btn-block" id="create-inorder">
 <?php
 $this->registerJs(<<<JS
 	$(".btn-a").click(function(e){
@@ -101,8 +120,37 @@ $this->registerJs(<<<JS
         });
 	});
 
-	$(".btn").click(function(e){
-		var key = $(this).attr("id").substring();
+	$(".btn-button").click(function(e){
+		var btn_name = $(this).attr("id");
+		var key = btn_name.substring(btn_name.indexOf("-")+1, btn_name.length);
+		var operator = btn_name.substring(0,btn_name.indexOf("-"));
+		var num = $("#num"+key).val();
+		if(operator=="confirm"){
+			$.post("?r=material-warehouse-in-order/confirm",
+	        {
+	            key:key,
+	            num:num
+	        });
+		}else{
+			alert("确定删除该记录？");
+			$.post("?r=material-warehouse-in-order/delete",
+	        {
+	            key:key
+	        });
+		}
+	});
+
+	$("#create-inorder").click(function(){
+		var employee_id = $("#employee_id").val();
+		var remark = $("#remark").val();
+		var warehouse_id = $("#warehouse_id").val();
+		console.log(employee_id + " " + remark + " " + warehouse_id);
+		$.post("?r=material-warehouse-in-order/new",
+	        {
+	            employee_id:employee_id,
+	            remark:remark,
+	            warehouse_id:warehouse_id
+	        });
 	});
 JS
 );

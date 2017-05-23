@@ -3,7 +3,9 @@
 namespace app\controllers;
 
 use Yii;
+use app\models\Material;
 use app\models\MaterialWarehouseInOrder;
+use app\models\MaterialWarehouseIn;
 use app\models\SearchMaterialWarehouseInOrder;
 use app\models\ProductWarehouseInOrder;
 use app\models\SearchProductWarehouseInOrder;
@@ -126,19 +128,65 @@ class MaterialWarehouseInOrderController extends Controller
         return $this->redirect(['create']);
     }
 
-    public function actionDelete($id){
-        $cookies = Yii::$app->request->cookies;
+    public function actionDelete(){
+        $key=Yii::$app->request->post('key');
+        $cookies = Yii::$app->response->cookies;
 
-        $cookies->remove('message'.$id);
+        $cookies->remove('message'.$key);
+
+        return $this->redirect(['create']);
     }
 
-    public function actionChange($num, $id){
+    public function actionConfirm(){
+        $key=Yii::$app->request->post('key');
+        $num=Yii::$app->request->post('num');
         $cookies = Yii::$app->response->cookies;
  
         $cookies->add(new \yii\web\Cookie([
-            'name' => 'message'.$id,
+            'name' => 'message'.$key,
             'value' => $num,
             'expire'=>time()+360
         ]));
+
+        return $this->redirect(['create']);
+    }
+
+    public function actionNew(){
+        $employee_id=Yii::$app->request->post('employee_id');
+        $remark=Yii::$app->request->post('remark');
+        $warehouse_id=Yii::$app->request->post('warehouse_id');
+
+        $cookies_request = Yii::$app->request->cookies;
+
+        $count = Material::find()->count();
+
+        $messages = array();
+        for($i=0;$i<$count;$i++){
+            if(($item = $cookies_request->get('message'.$i))!=NULL){
+                $messages[] = array('id'=>$i,'num'=>$item);
+            }
+        }
+
+        if(count($messages)>0){
+            $model = new MaterialWarehouseInOrder();
+            $model->material_in_orderid = 20;
+            $model->employee_id = $employee_id;
+            $model->material_in_ordertime = time();
+            $model->material_in_orderremark = $remark;
+            if($model->save()>0){
+                foreach ($messages as $message) {
+                    $str = 'modeldetail'.$message['id'];
+                    $$str = new MaterialWarehouseIn();
+                    $$str->warehouse_id = $warehouse_id;
+                    $$str->material_id = $message['id'];
+                    $$str->material_in_orderid = $model->material_in_orderid;
+                    $$str->material_in_count = $message['num'];
+
+                    $$str->save();   
+                }
+            }
+        }
+
+        return $this->redirect(['view','id'=>$model->material_in_orderid]);
     }
 }
