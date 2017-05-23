@@ -31,8 +31,7 @@ class ProductWarehouseInOrder extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['product_in_orderid'], 'required'],
-            [['product_in_orderid', 'employee_id', 'product_in_ordertime'], 'integer'],
+            [['employee_id', 'product_in_ordertime'], 'integer'],
             [['product_in_orderremark'], 'string', 'max' => 50],
             [['employee_id'], 'exist', 'skipOnError' => true, 'targetClass' => Employee::className(), 'targetAttribute' => ['employee_id' => 'employee_id']],
         ];

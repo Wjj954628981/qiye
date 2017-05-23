@@ -12,6 +12,7 @@ use Yii;
  * @property integer $material_in_ordertime
  * @property string $material_in_orderremark
  *
+ * @property MaterialWarehouseIn[] $materialWarehouseIns
  * @property Employee $employee
  */
 class MaterialWarehouseInOrder extends \yii\db\ActiveRecord
@@ -30,8 +31,7 @@ class MaterialWarehouseInOrder extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['material_in_orderid'], 'required'],
-            [['material_in_orderid', 'employee_id', 'material_in_ordertime'], 'integer'],
+            [['employee_id', 'material_in_ordertime'], 'integer'],
             [['material_in_orderremark'], 'string', 'max' => 50],
             [['employee_id'], 'exist', 'skipOnError' => true, 'targetClass' => Employee::className(), 'targetAttribute' => ['employee_id' => 'employee_id']],
         ];
@@ -48,6 +48,14 @@ class MaterialWarehouseInOrder extends \yii\db\ActiveRecord
             'material_in_ordertime' => '入库时间',
             'material_in_orderremark' => '入库备注',
         ];
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getMaterialWarehouseIns()
+    {
+        return $this->hasMany(MaterialWarehouseIn::className(), ['material_in_orderid' => 'material_in_orderid']);
     }
 
     /**

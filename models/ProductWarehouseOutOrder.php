@@ -31,8 +31,7 @@ class ProductWarehouseOutOrder extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['product_out_orderid'], 'required'],
-            [['product_out_orderid', 'employee_id', 'product_out_ordertime'], 'integer'],
+            [['employee_id', 'product_out_ordertime'], 'integer'],
             [['product_out_orderremark'], 'string', 'max' => 50],
             [['employee_id'], 'exist', 'skipOnError' => true, 'targetClass' => Employee::className(), 'targetAttribute' => ['employee_id' => 'employee_id']],
         ];

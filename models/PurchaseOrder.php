@@ -30,8 +30,7 @@ class PurchaseOrder extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['purchase_order_id'], 'required'],
-            [['purchase_order_id', 'employee_id', 'purchase_time'], 'integer'],
+            [['employee_id', 'purchase_time'], 'integer'],
             [['employee_id'], 'exist', 'skipOnError' => true, 'targetClass' => Employee::className(), 'targetAttribute' => ['employee_id' => 'employee_id']],
         ];
     }

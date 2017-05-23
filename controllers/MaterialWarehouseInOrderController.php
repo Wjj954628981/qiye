@@ -169,7 +169,7 @@ class MaterialWarehouseInOrderController extends Controller
 
         if(count($messages)>0){
             $model = new MaterialWarehouseInOrder();
-            $model->material_in_orderid = 20;
+            $model->material_in_orderid = null;
             $model->employee_id = $employee_id;
             $model->material_in_ordertime = time();
             $model->material_in_orderremark = $remark;
@@ -182,11 +182,19 @@ class MaterialWarehouseInOrderController extends Controller
                     $$str->material_in_orderid = $model->material_in_orderid;
                     $$str->material_in_count = $message['num'];
 
-                    $$str->save();   
+                    $$str->save();
+                    // $modeldetail = new MaterialWarehouseIn();
+                    // $modeldetail->warehouse_id = $warehouse_id;
+                    // $modeldetail->material_id = $message['id'];
+                    // $modeldetail->material_in_orderid = $model->material_in_orderid;
+                    // $modeldetail->material_in_count = $message['num'];
+
+                    // $modeldetail->save();
                 }
             }
         }
 
-        return $this->redirect(['view','id'=>$model->material_in_orderid]);
+        // return $this->redirect(['view','id'=>$model->material_in_orderid]);
+        return $this->redirect(['index']);
     }
 }

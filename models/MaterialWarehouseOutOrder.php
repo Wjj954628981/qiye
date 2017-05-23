@@ -34,8 +34,7 @@ class MaterialWarehouseOutOrder extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['material_out_orderid'], 'required'],
-            [['material_out_orderid', 'employee_id', 'department_id', 'material_out_ordertime', 'material_out_orderstate'], 'integer'],
+            [['employee_id', 'department_id', 'material_out_ordertime', 'material_out_orderstate'], 'integer'],
             [['material_out_orderremark'], 'string', 'max' => 50],
             [['employee_id'], 'exist', 'skipOnError' => true, 'targetClass' => Employee::className(), 'targetAttribute' => ['employee_id' => 'employee_id']],
             [['department_id'], 'exist', 'skipOnError' => true, 'targetClass' => Department::className(), 'targetAttribute' => ['department_id' => 'department_id']],
