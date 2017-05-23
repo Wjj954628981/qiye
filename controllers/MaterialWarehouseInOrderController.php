@@ -156,9 +156,10 @@ class MaterialWarehouseInOrderController extends Controller
         $remark=Yii::$app->request->post('remark');
         $warehouse_id=Yii::$app->request->post('warehouse_id');
 
-        $cookies_request = Yii::$app->request->cookies;
+        $cookies_response = Yii::$app->response->cookies;
 
         $count = Material::find()->count();
+        $cookies_request = Yii::$app->request->cookies;
 
         $messages = array();
         for($i=0;$i<$count;$i++){
@@ -175,26 +176,17 @@ class MaterialWarehouseInOrderController extends Controller
             $model->material_in_orderremark = $remark;
             if($model->save()>0){
                 foreach ($messages as $message) {
-                    $str = 'modeldetail'.$message['id'];
-                    $$str = new MaterialWarehouseIn();
-                    $$str->warehouse_id = $warehouse_id;
-                    $$str->material_id = $message['id'];
-                    $$str->material_in_orderid = $model->material_in_orderid;
-                    $$str->material_in_count = $message['num'];
+                    $modeldetail = new MaterialWarehouseIn();
+                    $modeldetail->warehouse_id = $warehouse_id;
+                    $modeldetail->material_id = $message['id'];
+                    $modeldetail->material_in_orderid = $model->material_in_orderid;
 
-                    $$str->save();
-                    // $modeldetail = new MaterialWarehouseIn();
-                    // $modeldetail->warehouse_id = $warehouse_id;
-                    // $modeldetail->material_id = $message['id'];
-                    // $modeldetail->material_in_orderid = $model->material_in_orderid;
-                    // $modeldetail->material_in_count = $message['num'];
-
-                    // $modeldetail->save();
+                    //界面中无所谓 控制器需要将cookie对象转换为string
+                    $modeldetail->material_in_count = (string)$message['num'];
+                    $modeldetail->save();
                 }
             }
         }
-
-        // return $this->redirect(['view','id'=>$model->material_in_orderid]);
-        return $this->redirect(['index']);
+        return $this->redirect(['view','id'=>$model->material_in_orderid]);
     }
 }

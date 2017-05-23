@@ -60,5 +60,14 @@ $this->title = $model->material_in_orderid;
             'layout'=>"{items}\n{pager}",
             'showOnEmpty'=>false,
         ]); ?>
+<input type="button" value="返回" class="btn btn-primary btn-lg btn-block" id="backtoindex">
 
 </div>
+<?php
+$this->registerJs(<<<JS
+    $("#backtoindex").click(function(e){
+        window.location = "?r=material-warehouse-in-order/index"
+    });
+JS
+);
+?>

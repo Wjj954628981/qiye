@@ -90,7 +90,8 @@ use yii\grid\GridView;
 	<tr>
 	<?php
 		echo '<th>'.Material::find()->where(['material_id'=>$message['id']])->one()['material_name'].'</th>';
-		echo '<th><input type="text" value="'.$message['num'].'" id="num'.$message['id'].'"></th>';
+		echo '<th><input type="text" value="'.(string)$message['num'].'" id="num'.$message['id'].'"></th>';
+		// echo '<th>'.$message['num'].'</th>';
 		echo '<th> <input type="button" class="btn btn-primary btn-button" value="确认" id="confirm-'.$message['id'].'"> <input type="button" class="btn btn-primary btn-button" value="删除" id="delete-'.$message['id'].'"> </th>';
 	?>
 	</tr>
@@ -145,12 +146,22 @@ $this->registerJs(<<<JS
 		var remark = $("#remark").val();
 		var warehouse_id = $("#warehouse_id").val();
 		console.log(employee_id + " " + remark + " " + warehouse_id);
-		$.post("?r=material-warehouse-in-order/new",
+		if(employee_id==""){
+			alert("请输入负责人id！");
+		}else if(warehouse_id==""){
+			alert("请输入仓库id！");
+		}else if(remark==""){
+			remark="无备注";
+		}
+		
+		if(employee_id!=""&warehouse_id!=""){
+			$.post("?r=material-warehouse-in-order/new",
 	        {
 	            employee_id:employee_id,
 	            remark:remark,
 	            warehouse_id:warehouse_id
 	        });
+		}
 	});
 JS
 );
