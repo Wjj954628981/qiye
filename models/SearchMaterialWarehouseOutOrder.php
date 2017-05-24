@@ -18,7 +18,7 @@ class SearchMaterialWarehouseOutOrder extends MaterialWarehouseOutOrder
     public function rules()
     {
         return [
-            [['material_out_orderid', 'employee_id', 'department_id', 'material_out_ordertime', 'material_out_orderstate'], 'integer'],
+            [['material_out_orderid', 'employee_id', 'process_id', 'material_out_ordertime'],'integer'],
             [['material_out_orderremark'], 'safe'],
         ];
     }
@@ -61,9 +61,8 @@ class SearchMaterialWarehouseOutOrder extends MaterialWarehouseOutOrder
         $query->andFilterWhere([
             'material_out_orderid' => $this->material_out_orderid,
             'employee_id' => $this->employee_id,
-            'department_id' => $this->department_id,
+            'process_id' => $this->process_id,
             'material_out_ordertime' => $this->material_out_ordertime,
-            'material_out_orderstate' => $this->material_out_orderstate,
         ]);
 
         $query->andFilterWhere(['like', 'material_out_orderremark', $this->material_out_orderremark]);

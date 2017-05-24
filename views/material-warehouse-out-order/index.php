@@ -24,9 +24,8 @@ $this->title = '材料出库单';
         'columns' => [
             'material_out_orderid',
             'employee_id',
-            'department_id',
+            'process_id',
             'material_out_ordertime:datetime',
-            'material_out_orderstate',
             // 'material_out_orderremark',
 
             [
@@ -89,7 +88,7 @@ $this->title = '材料出库单';
             [
                 'header' => "操作",
                 'class' => 'yii\grid\ActionColumn',
-                'template' => '{view} {update}',
+                'template' => '{view} ',
                 'urlCreator' => function ($action, $model, $key, $index) {
                     switch($action)
                     {

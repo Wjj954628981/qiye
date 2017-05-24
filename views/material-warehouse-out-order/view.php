@@ -26,9 +26,8 @@ $this->title = $model->material_out_orderid;
         'attributes' => [
             'material_out_orderid',
             'employee_id',
-            'department_id',
+            'process_id',
             'material_out_ordertime:datetime',
-            'material_out_orderstate',
             'material_out_orderremark',
         ],
     ]) ?>
@@ -63,4 +62,16 @@ $this->title = $model->material_out_orderid;
             'showOnEmpty'=>false,
         ]); ?>
 
+<input type="button" value="返回" class="btn btn-primary btn-lg btn-block" id="backtoindex">
+
 </div>
+
+
+<?php
+$this->registerJs(<<<JS
+    $("#backtoindex").click(function(e){
+        window.location = "?r=material-warehouse-out-order/index"
+    });
+JS
+);
+?>

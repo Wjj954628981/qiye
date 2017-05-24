@@ -16,11 +16,9 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'employee_id')->textInput() ?>
 
-    <?= $form->field($model, 'department_id')->textInput() ?>
+    <?= $form->field($model, 'process_id')->textInput() ?>
 
     <?= $form->field($model, 'material_out_ordertime')->textInput() ?>
-
-    <?= $form->field($model, 'material_out_orderstate')->textInput() ?>
 
     <?= $form->field($model, 'material_out_orderremark')->textInput(['maxlength' => true]) ?>
 

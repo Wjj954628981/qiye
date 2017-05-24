@@ -10,18 +10,18 @@ use yii\grid\GridView;
 
 $this->title = '创建材料出库单';
 
-$count = \yii\helpers\Json::htmlEncode(
-        \Yii::t('app', $process_getorderid)
-    );
+
 // $this->params['breadcrumbs'][] = ['label' => 'Material Warehouse Out Orders', 'url' => ['index']];
 // $this->params['breadcrumbs'][] = $this->title;
 
 $searchModel = new SearchProcessGetorderDetail(['process_getorderid'=>$process_getorderid]);
 $dataProvider = $searchModel->search([]);
+
+$process_getorderid = \yii\helpers\Json::htmlEncode(
+        \Yii::t('app', $process_getorderid)
+    );
 ?>
 
-<label>负责人ID:</label><input type="text" id="employee_id"><br>
-<label>出库备注:</label><input type="text" id="material_outorder_remark">
 <?= GridView::widget([
     'dataProvider' => $dataProvider,
     // 'filterModel' => $searchModel,
@@ -46,26 +46,25 @@ $dataProvider = $searchModel->search([]);
     'layout'=>"{items}\n{pager}",
     'showOnEmpty'=>false,
 ]); ?>
-
-<input type="button" class="btn btn-primary" id="add" value="确认">
+<input type="text" placeholder="负责人ID" id="employee_id" class="form-control"><br>
+<textarea class="form-control" placeholder="备注区域" id="material_outorder_remark"></textarea>
+<hr>
+<input type="button" value="确认" class="btn btn-primary btn-lg btn-block" id="add">
 
 <?php
-$this->registerJs('
-    $("#add").click(function(){
+
+$this->registerJs(<<<JS
+   $("#add").click(function(){
         var employee_id = $("#employee_id").val();
         var material_outorder_remark = $("#material_outorder_remark").val();
+        console.log(employee_id+material_outorder_remark);
         $.post("?r=material-warehouse-out-order/add",
         {
             employee_id:employee_id,
             material_outorder_remark:material_outorder_remark,
             process_getorderid:$process_getorderid
-        },
-        function(data,status){
-            alert(data + status);
-            if(status=="success"){
-                location.href="index.php?r=site/show&data="+data;
-            }
         });
     });
-');
+JS
+);
 ?>

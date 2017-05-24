@@ -19,11 +19,9 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'employee_id') ?>
 
-    <?= $form->field($model, 'department_id') ?>
+    <?= $form->field($model, 'process_id') ?>
 
     <?= $form->field($model, 'material_out_ordertime') ?>
-
-    <?= $form->field($model, 'material_out_orderstate') ?>
 
     <?php // echo $form->field($model, 'material_out_orderremark') ?>
 

@@ -9,14 +9,13 @@ use Yii;
  *
  * @property integer $material_out_orderid
  * @property integer $employee_id
- * @property integer $department_id
+ * @property integer $process_id
  * @property integer $material_out_ordertime
- * @property integer $material_out_orderstate
  * @property string $material_out_orderremark
  *
  * @property MaterialWarehouseOut[] $materialWarehouseOuts
  * @property Employee $employee
- * @property Department $department
+ * @property Process $process
  */
 class MaterialWarehouseOutOrder extends \yii\db\ActiveRecord
 {
@@ -34,10 +33,10 @@ class MaterialWarehouseOutOrder extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['employee_id', 'department_id', 'material_out_ordertime', 'material_out_orderstate'], 'integer'],
+            [['employee_id', 'process_id', 'material_out_ordertime'], 'integer'],
             [['material_out_orderremark'], 'string', 'max' => 50],
             [['employee_id'], 'exist', 'skipOnError' => true, 'targetClass' => Employee::className(), 'targetAttribute' => ['employee_id' => 'employee_id']],
-            [['department_id'], 'exist', 'skipOnError' => true, 'targetClass' => Department::className(), 'targetAttribute' => ['department_id' => 'department_id']],
+            [['process_id'], 'exist', 'skipOnError' => true, 'targetClass' => Process::className(), 'targetAttribute' => ['process_id' => 'process_id']],
         ];
     }
 
@@ -47,11 +46,10 @@ class MaterialWarehouseOutOrder extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'material_out_orderid' => '材料出库单ID',
-            'employee_id' => '员工ID',
-            'department_id' => '部门ID',
+            'material_out_orderid' => '物料出库单ID',
+            'employee_id' => '负责人ID',
+            'process_id' => '流水线ID',
             'material_out_ordertime' => '出库时间',
-            'material_out_orderstate' => '出库状态',
             'material_out_orderremark' => '出库备注',
         ];
     }
@@ -75,8 +73,8 @@ class MaterialWarehouseOutOrder extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getDepartment()
+    public function getProcess()
     {
-        return $this->hasOne(Department::className(), ['department_id' => 'department_id']);
+        return $this->hasOne(Process::className(), ['process_id' => 'process_id']);
     }
 }

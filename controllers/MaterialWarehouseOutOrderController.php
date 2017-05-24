@@ -3,6 +3,9 @@
 namespace app\controllers;
 
 use Yii;
+use app\models\MaterialWarehouseOut;
+use app\models\ProcessGetorder;
+use app\models\ProcessGetorderDetail;
 use app\models\MaterialWarehouseOutOrder;
 use app\models\SearchMaterialWarehouseOutOrder;
 use app\models\ProductWarehouseOutOrder;
@@ -39,11 +42,11 @@ class MaterialWarehouseOutOrderController extends Controller
     {
         $searchModelMaterialWarehouseOutOrder = new SearchMaterialWarehouseOutOrder();
         $dataProviderMaterialWarehouseOutOrder = $searchModelMaterialWarehouseOutOrder->search(Yii::$app->request->queryParams);
-        $dataProviderMaterialWarehouseOutOrder->Pagination->defaultPageSize = 10;
+        $dataProviderMaterialWarehouseOutOrder->Pagination->defaultPageSize = 5;
 
         $searchModelProductWarehouseOutOrder = new SearchProductWarehouseOutOrder();
         $dataProviderProductWarehouseOutOrder = $searchModelProductWarehouseOutOrder->search(Yii::$app->request->queryParams);
-        $dataProviderProductWarehouseOutOrder->Pagination->defaultPageSize = 10;
+        $dataProviderProductWarehouseOutOrder->Pagination->defaultPageSize = 5;
 
         return $this->render('index', [
             'searchModelMaterialWarehouseOutOrder' => $searchModelMaterialWarehouseOutOrder,
@@ -132,5 +135,26 @@ class MaterialWarehouseOutOrderController extends Controller
         $process_getorderid=Yii::$app->request->post('process_getorderid');
 
 
+        $process_id = ProcessGetorder::find()->select(['process_id'])->where(['process_getorderid'=>$process_getorderid])->all();
+        $messages = ProcessGetorderDetail::find()->select('material_id','material_out_count')->where(['process_getorderid'=>$process_getorderid])->all();
+
+        $model = new MaterialWarehouseOutOrder();
+        $model->material_out_orderid = null;
+        $model->employee_id = $employee_id;
+        $model->process_id = (int)$process_id;
+        $model->material_out_ordertime = time();
+        $model->material_out_orderremark = $material_outorder_remark;
+
+        if($model->save()>0){
+            foreach ($messages as $message) {
+                $modeldetail = new MaterialWarehouseOut();
+                $modeldetail->material_out_orderid = $model->material_out_orderid;
+                // $modeldetail->warehouse_id = ;
+                $modeldetail->material_id = (int)$message['material_id'];
+                $modeldetail->material_out_count = (int)$message['material_out_count'];
+                $modeldetail->save();
+            }
+        }
+        return $this->redirect(['view','id'=>$model->material_out_orderid]);
     }
 }
