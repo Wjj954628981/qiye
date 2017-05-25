@@ -35,8 +35,7 @@ class Orderlist extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['order_id'], 'required'],
-            [['order_id', 'customer_id', 'purchase_time', 'duetime', 'telephone', 'order_state'], 'integer'],
+            [['customer_id', 'purchase_time', 'duetime', 'telephone', 'order_state'], 'integer'],
             [['person_name'], 'string', 'max' => 50],
             [['customer_id'], 'exist', 'skipOnError' => true, 'targetClass' => Customer::className(), 'targetAttribute' => ['customer_id' => 'customer_id']],
         ];

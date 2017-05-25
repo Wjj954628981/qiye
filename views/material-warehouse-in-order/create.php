@@ -101,7 +101,7 @@ use yii\grid\GridView;
 </table>
 
 <input type="text" placeholder="负责人ID" id="employee_id" class="form-control"><hr>
-<input type="text" placeholder="仓库ID" id="employee_id" class="form-control"><hr>
+<input type="text" placeholder="仓库ID" id="warehouse_id" class="form-control"><hr>
 
 <textarea class="form-control" placeholder="备注区域" id="remark"></textarea>
 <hr>

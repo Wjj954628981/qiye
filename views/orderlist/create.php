@@ -1,14 +1,10 @@
 <?php
-
 use yii\helpers\Html;
 use app\models\Product;
 use app\models\SearchProduct;
 use yii\grid\GridView;
-
-
 /* @var $this yii\web\View */
 /* @var $model app\models\MaterialWarehouseInOrder */
-
 $this->title = '创建订单';
 // $this->params['breadcrumbs'][] = ['label' => 'Material Warehouse In Orders', 'url' => ['index']];
 // $this->params['breadcrumbs'][] = $this->title;
@@ -23,7 +19,6 @@ $this->title = '创建订单';
 	// );
     $count = Product::find()->count();
 	$cookies = Yii::$app->request->cookies;
-
 	$messages = array();
 	for($i=0;$i<$count;$i++){
 		if(($item = $cookies->get('message'.$i))!=NULL){
@@ -102,13 +97,13 @@ $this->title = '创建订单';
 </tbody>
 </table>
 
-<input type="text" placeholder="下单人员" id="employee_id" class="form-control">
+<input type="text" placeholder="下单人员" id="person_name" class="form-control">
 <hr>
-<input type="text" placeholder="交货时间" id="employee_id" class="form-control">
+<input type="text" placeholder="交货时间" id="duetime" class="form-control">
 <hr>
-<input type="text" placeholder="顾客ID" id="employee_id" class="form-control">
+<input type="text" placeholder="顾客ID" id="customer_id" class="form-control">
 <hr>
-<input type="text" placeholder="联系方式" id="employee_id" class="form-control">
+<input type="text" placeholder="联系方式" id="telephone" class="form-control">
 <hr>
 
 
@@ -116,13 +111,10 @@ $this->title = '创建订单';
 <input type="button" value="提交订单" class="btn btn-primary btn-lg btn-block" id="create-inorder">
 
 <!-- <div class="material-warehouse-in-order-create">
-
     <h1><?= Html::encode($this->title) ?></h1>
-
     <?= $this->render('_form', [
         'model' => $model,
     ]) ?>
-
 </div> -->
 <?php
 $this->registerJs(<<<JS
@@ -133,7 +125,6 @@ $this->registerJs(<<<JS
             key:key
         });
     });
-
     $(".btn-button").click(function(e){
         var btn_name = $(this).attr("id");
         var key = btn_name.substring(btn_name.indexOf("-")+1, btn_name.length);
@@ -153,7 +144,6 @@ $this->registerJs(<<<JS
             });
         }
     });
-
     $("#create-inorder").click(function(){
         var duetime = $("#duetime").val();
         var customer_id = $("#customer_id").val();

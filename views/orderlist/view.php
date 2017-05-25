@@ -1,13 +1,10 @@
 <?php
-
 use yii\helpers\Html;
 use yii\widgets\DetailView;
 use app\models\SearchOrderProduct;
 use yii\grid\GridView;
-
 /* @var $this yii\web\View */
 /* @var $model app\models\Orderlist */
-
 $this->title = $model->order_id;
 // $this->params['breadcrumbs'][] = ['label' => '订单列表', 'url' => ['index']];
 // $this->params['breadcrumbs'][] = $this->title;

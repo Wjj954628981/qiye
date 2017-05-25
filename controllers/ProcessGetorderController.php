@@ -33,10 +33,11 @@ class ProcessGetorderController extends Controller
      * Lists all ProcessGetorder models.
      * @return mixed
      */
-    public function actionIndex()
+    public function actionIndex($id)
     {
-        $searchModel = new SearchProcessGetorder();
+        $searchModel = new SearchProcessGetorder(['process_id'=>$id]);
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $dataProvider->pagination->defaultPageSize =10;
 
         return $this->render('index', [
             'searchModel' => $searchModel,

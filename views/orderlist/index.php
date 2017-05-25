@@ -1,29 +1,15 @@
 <?php
-
 use yii\helpers\Html;
 use yii\grid\GridView;
-
-
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\SearchOrderlist */
 /* @var $dataProvider yii\data\ActiveDataProvider */
-
 $this->title = '订单列表';
-
  // $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="orderlist-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
-
-    <div class="row">
-        <!-- <div class="col-md-1"></div> -->
-        <div class="col-md-2">
-            <?= Html::a('创建订单', ['create'], ['class' => 'btn btn-primary']) ?>
-        </div>
-         <div class="col-md-2">
-            <button class="btn btn-primary" id="btndec">分解订单</button>
-        </div> 
        
     </div>
     <hr>
@@ -31,12 +17,10 @@ $this->title = '订单列表';
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'options' => ['id' => 'grid'],
-
         'columns' => [
             [
                 'class' => 'yii\grid\CheckboxColumn'
             ],
-
              'order_state',
              [
                  'attribute'=>'order_id',
@@ -58,7 +42,6 @@ $this->title = '订单列表';
             'person_name',
             'telephone',
            
-
             [
                 'header' => "操作",
                 'class' => 'yii\grid\ActionColumn',
@@ -69,18 +52,21 @@ $this->title = '订单列表';
         'emptyTextOptions'=>['style'=>'font-weight:bold'],
         'layout'=>"{items}\n{pager}",   
         'showOnEmpty'=>false,
-    ]);
+    ]);?>
+    <input type="button" value="分解订单" class="btn btn-primary btn-lg btn-block" id="btndec">
+
+    <?php
     $this->registerJs('
         console.log("in orderlist index");
         $("#btndec").click(function(){
             var keys = $("#grid").yiiGridView("getSelectedRows");
-            alert(keys);
+            //alert(keys);
             $.post("?r=orderlist/decompose",
             {
                 keys:keys
             },
             function(data, status){
-                //alert(status);
+                //alert(data+status);
             });
         });
     ');

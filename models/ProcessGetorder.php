@@ -42,9 +42,9 @@ class ProcessGetorder extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'process_getorderid' => 'Process Getorderid',
-            'process_id' => 'Process ID',
-            'process_getordertime' => 'Process Getordertime',
+            'process_getorderid' => '领料单ID',
+            'process_id' => '流水线ID',
+            'process_getordertime' => '领料单下单时间',
         ];
     }
 
