@@ -1,21 +1,29 @@
 <?php
 
+use app\models\Orderlist;
+use app\models\OrderProduct;
 use yii\helpers\Html;
+use yii\widgets\ActiveForm;
+
 
 
 /* @var $this yii\web\View */
 /* @var $model app\models\ProductWarehouseOutOrder */
 
 $this->title = '创建产品出库单';
-// $this->params['breadcrumbs'][] = ['label' => 'Product Warehouse Out Orders', 'url' => ['index']];
-// $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="product-warehouse-out-order-create">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+<?php
+$form = ActiveForm::begin([
+    'id' => 'login-form',
+    'options' => ['class' => 'form-horizontal'],
+]) ?>
+    <?= $form->field($model, 'order_id')->textInput() ?>
+    <?= $form->field($model, 'employee_id')->textInput() ?>
 
-    <?= $this->render('_form', [
-        'model' => $model,
-    ]) ?>
-
-</div>
+    <div class="form-group">
+        <div class="col-lg-offset-1 col-lg-11">
+            <?= Html::submitButton('创建', ['class' => 'btn btn-primary']) ?>
+        </div>
+    </div>
+<?php ActiveForm::end() ?>

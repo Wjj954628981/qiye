@@ -17,6 +17,8 @@ use Yii;
  */
 class ProductWarehouseOutOrder extends \yii\db\ActiveRecord
 {
+
+    public $order_id;
     /**
      * @inheritdoc
      */
@@ -31,7 +33,8 @@ class ProductWarehouseOutOrder extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['employee_id', 'product_out_ordertime'], 'integer'],
+            [['order_id'], 'required'],
+            [['product_out_orderid', 'employee_id', 'product_out_ordertime'], 'integer'],
             [['product_out_orderremark'], 'string', 'max' => 50],
             [['employee_id'], 'exist', 'skipOnError' => true, 'targetClass' => Employee::className(), 'targetAttribute' => ['employee_id' => 'employee_id']],
         ];
@@ -43,6 +46,7 @@ class ProductWarehouseOutOrder extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
+            'order_id' => '订单ID',
             'product_out_orderid' => '产品出库单ID',
             'employee_id' => '员工ID',
             'product_out_ordertime' => '出库时间',
@@ -64,5 +68,16 @@ class ProductWarehouseOutOrder extends \yii\db\ActiveRecord
     public function getEmployee()
     {
         return $this->hasOne(Employee::className(), ['employee_id' => 'employee_id']);
+    }
+
+    public function beforeSave($insert){
+        if($this->isNewRecord){
+            //$this->order_id = 1;
+            
+            // $this->product_out_ordertime = 1;
+            $this->product_out_ordertime = strtotime(date('Y-m-d H:i:s'));
+            $this->product_out_orderremark = 'test';
+        }
+        return parent::beforeSave($insert);
     }
 }

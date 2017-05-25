@@ -10,6 +10,7 @@ use app\models\MaterialWarehouseOutOrder;
 use app\models\SearchMaterialWarehouseOutOrder;
 use app\models\ProductWarehouseOutOrder;
 use app\models\SearchProductWarehouseOutOrder;
+use app\models\WarehouseMaterial;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -135,26 +136,31 @@ class MaterialWarehouseOutOrderController extends Controller
         $process_getorderid=Yii::$app->request->post('process_getorderid');
 
 
-        $process_id = ProcessGetorder::find()->select(['process_id'])->where(['process_getorderid'=>$process_getorderid])->all();
-        $messages = ProcessGetorderDetail::find()->select('material_id','material_out_count')->where(['process_getorderid'=>$process_getorderid])->all();
+        $processGetOrder = ProcessGetorder::find()->where(['process_getorderid'=>$process_getorderid])->one();
+        $messages = ProcessGetorderDetail::find()->where(['process_getorderid'=>$process_getorderid])->all();
 
         $model = new MaterialWarehouseOutOrder();
         $model->material_out_orderid = null;
         $model->employee_id = $employee_id;
-        $model->process_id = (int)$process_id;
+        $model->process_id = $processGetOrder->process_id;
         $model->material_out_ordertime = time();
         $model->material_out_orderremark = $material_outorder_remark;
 
-        if($model->save()>0){
-            foreach ($messages as $message) {
-                $modeldetail = new MaterialWarehouseOut();
-                $modeldetail->material_out_orderid = $model->material_out_orderid;
-                // $modeldetail->warehouse_id = ;
-                $modeldetail->material_id = (int)$message['material_id'];
-                $modeldetail->material_out_count = (int)$message['material_out_count'];
-                $modeldetail->save();
-            }
-        }
-        return $this->redirect(['view','id'=>$model->material_out_orderid]);
+        // if($model->save()>0){
+        //     // foreach ($messages as $message) {
+        //     //     $warehouses = WarehouseMaterial::find()->where(['material_id'=>$message['material_id']])->all();
+        //     //     foreach ($warehouses as $warehouse) {
+        //     //         if($message['material_out_count']<$warehouse->material_count)
+        //     //     }
+        //     //     $modeldetail = new MaterialWarehouseOut();
+        //     //     $modeldetail->material_out_orderid = $model->material_out_orderid;
+        //     //     // $modeldetail->warehouse_id = ;
+        //     //     $modeldetail->material_id = (int)$message['material_id'];
+        //     //     $modeldetail->material_out_count = (int)$message['material_out_count'];
+        //     //     $modeldetail->save();
+        //     // }
+        // }
+        // return $this->redirect(['view','id'=>$model->material_out_orderid]);
+        return $this->redirect(['index']);
     }
 }

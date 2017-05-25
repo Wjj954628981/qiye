@@ -91,7 +91,6 @@ use yii\grid\GridView;
 	<?php
 		echo '<th>'.Material::find()->where(['material_id'=>$message['id']])->one()['material_name'].'</th>';
 		echo '<th><input type="text" value="'.(string)$message['num'].'" id="num'.$message['id'].'"></th>';
-		// echo '<th>'.$message['num'].'</th>';
 		echo '<th> <input type="button" class="btn btn-primary btn-button" value="确认" id="confirm-'.$message['id'].'"> <input type="button" class="btn btn-primary btn-button" value="删除" id="delete-'.$message['id'].'"> </th>';
 	?>
 	</tr>
@@ -118,6 +117,9 @@ $this->registerJs(<<<JS
 		$.post("?r=material-warehouse-in-order/add",
         {
             key:key
+        },
+        function(data, status){
+        	
         });
 	});
 
@@ -131,7 +133,10 @@ $this->registerJs(<<<JS
 	        {
 	            key:key,
 	            num:num
-	        });
+	        },
+		    function(data,status){
+
+			});
 		}else{
 			alert("确定删除该记录？");
 			$.post("?r=material-warehouse-in-order/delete",
