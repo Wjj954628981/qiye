@@ -44,10 +44,10 @@ class Supplier extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'supplier_id' => 'Supplier ID',
-            'company_name' => 'Company Name',
-            'address' => 'Address',
-            'telephone' => 'Telephone',
+            'supplier_id' => '供应商ID',
+            'company_name' => '公司名称',
+            'address' => '地址',
+            'telephone' => '联系方式',
         ];
     }
 

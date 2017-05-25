@@ -46,7 +46,7 @@ $process_getorderid = \yii\helpers\Json::htmlEncode(
     'layout'=>"{items}\n{pager}",
     'showOnEmpty'=>false,
 ]); ?>
-<input type="text" placeholder="负责人ID" id="employee_id" class="form-control"><br>
+<input type="text" placeholder="负责人ID" id="employee_id" class="form-control"><hr>
 <textarea class="form-control" placeholder="备注区域" id="material_outorder_remark"></textarea>
 <hr>
 <input type="button" value="确认" class="btn btn-primary btn-lg btn-block" id="add">

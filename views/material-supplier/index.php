@@ -7,7 +7,7 @@ use yii\grid\GridView;
 /* @var $searchModel app\models\SearchMaterialSupplier */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Material Suppliers';
+$this->title = '供应商供料信息';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="material-supplier-index">
@@ -26,6 +26,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
             'supplier_id',
             'material_id',
+            'material.material_name',
 
             ['class' => 'yii\grid\ActionColumn'],
         ],

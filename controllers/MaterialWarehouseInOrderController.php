@@ -114,6 +114,10 @@ class MaterialWarehouseInOrderController extends Controller
     }
 
 
+    public function actionTest(){
+        $key=Yii::$app->request->post('key');
+        echo $key;
+    }
 
     public function actionAdd(){
         $key=Yii::$app->request->post('key');
@@ -121,11 +125,14 @@ class MaterialWarehouseInOrderController extends Controller
  
         $cookies->add(new \yii\web\Cookie([
             'name' => 'message'.$key,
-            'value' => 0,
+            'value' => 1,
             'expire'=>time()+360
         ]));
 
         return $this->redirect(['create']);
+        // $material_name = Material::find()->where(['material_id'=>$key])->one()['material_name'];
+        // $result = array('material_name'=>$material_name, 'value'=>1);
+        // echo json_encode($result);
     }
 
     public function actionDelete(){

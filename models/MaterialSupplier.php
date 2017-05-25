@@ -42,8 +42,8 @@ class MaterialSupplier extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'supplier_id' => 'Supplier ID',
-            'material_id' => 'Material ID',
+            'supplier_id' => '供应商ID',
+            'material_id' => '材料ID',
         ];
     }
 

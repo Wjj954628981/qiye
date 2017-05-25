@@ -52,9 +52,9 @@ class Product extends \yii\db\ActiveRecord
     {
         return [
             'product_id' => '产品ID',
-            'product_category_id' => 'Product Category ID',
+            'product_category_id' => '产品种类ID',
             'product_name' => '产品名称',
-            'product_price' => 'Product Price',
+            'product_price' => '产品价格',
         ];
     }
 

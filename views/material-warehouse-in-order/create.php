@@ -72,7 +72,7 @@ use yii\grid\GridView;
 
 
 
-<table class="table table-bordered">
+<table class="table table-bordered" id="mytable">
 <thead>
 	<tr>
 		<th>材料名称</th>
@@ -100,12 +100,8 @@ use yii\grid\GridView;
 </tbody>
 </table>
 
-<label>负责人ID：</label>
-<input type="text" id="employee_id">
-<hr>
-<label>仓库ID：</label>
-<input type="text" id="warehouse_id">
-<hr>
+<input type="text" placeholder="负责人ID" id="employee_id" class="form-control"><hr>
+<input type="text" placeholder="仓库ID" id="employee_id" class="form-control"><hr>
 
 <textarea class="form-control" placeholder="备注区域" id="remark"></textarea>
 <hr>
@@ -119,7 +115,9 @@ $this->registerJs(<<<JS
             key:key
         },
         function(data, status){
-        	
+        	//var msg = JSON.parse(data);
+        	//$("#mytable").append("<tr><th>test</th></tr>");
+        	//$("#mytable").append("<tr><th>"+data+"</th></tr>");
         });
 	});
 
