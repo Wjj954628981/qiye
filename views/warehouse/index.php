@@ -79,6 +79,7 @@ $this->title = '仓库';
                             'enableSorting' => false
                         ],
                         [
+                            'label'=>'物料名称',
                             'attribute' => 'material_name',
                             'value' => 'material.material_name'
                         ]
@@ -106,6 +107,7 @@ $this->title = '仓库';
                             'enableSorting' => false
                         ],
                         [
+                            'label'=>'产品名称',
                             'attribute' => 'product_name',
                             'value' => 'product.product_name'
                         ]

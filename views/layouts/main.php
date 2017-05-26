@@ -36,9 +36,10 @@ AppAsset::register($this);
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav navbar-right'],
         'items' => [
-            ['label'=>'购买','url'=>['/orderlist/create']],
+            ['label'=>'我要买','url'=>['/orderlist/create']],
             ['label' => '订单列表', 'url' => ['/orderlist']],
             ['label'=>'流水线领料单','url'=>['/process-getorder','id'=>'']],
+            ['label'=>'供货商','url'=>['/supplier']],
             ['label' => '仓库',
             // 'url' => ['/material-lack-order'],
             'items' => [

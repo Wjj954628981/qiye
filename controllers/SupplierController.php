@@ -5,6 +5,8 @@ namespace app\controllers;
 use Yii;
 use app\models\Supplier;
 use app\models\SearchSupplier;
+use app\models\MaterialSupplier;
+use app\models\SearchMaterialSupplier;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -51,8 +53,13 @@ class SupplierController extends Controller
      */
     public function actionView($id)
     {
+
+        $searchModel = new SearchMaterialSupplier(['supplier_id'=>$id]);
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $dataProvider->Pagination->defaultPageSize = 5;
         return $this->render('view', [
             'model' => $this->findModel($id),
+            'dataProvider'=>$dataProvider,
         ]);
     }
 

@@ -228,11 +228,11 @@ class OrderlistController extends Controller
             $process_id = $process['process_id'];
             $this->newgetorder($product_id,$product_num,$process_id);
             echo '<description>';
-            // var_dump($process_id['description']);
-            $order = Orderlist::findOne($order_id);
-            $order->order_state = 1;
-            $order->save(); // 等同于 $User->update();
         }
+        // var_dump($process_id['description']);
+        $order = Orderlist::findOne($order_id);
+        $order->order_state = 1;
+        $order->save(); // 等同于 $User->update();
     }
 
     public function newgetorder($product_id,$product_num,$process_id)

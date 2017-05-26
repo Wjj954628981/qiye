@@ -22,8 +22,11 @@ $form = ActiveForm::begin([
     <?= $form->field($model, 'employee_id')->textInput() ?>
 
     <div class="form-group">
-        <div class="col-lg-offset-1 col-lg-11">
+        <div class="col-lg-20">
             <?= Html::submitButton('创建', ['class' => 'btn btn-primary']) ?>
+        </div>
+        <div class="col-lg-20">
+        
         </div>
     </div>
 <?php ActiveForm::end() ?>

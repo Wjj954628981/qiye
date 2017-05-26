@@ -5,6 +5,8 @@ namespace app\controllers;
 use Yii;
 use app\models\ProcessGetorder;
 use app\models\SearchProcessGetorder;
+use app\models\ProcessGetorderDetail;
+use app\models\SearchProcessGetorderDetail;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -52,8 +54,12 @@ class ProcessGetorderController extends Controller
      */
     public function actionView($id)
     {
+        $searchModel = new SearchProcessGetorderDetail(['process_getorderid'=>$id]);
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $dataProvider->pagination->defaultPageSize = 5;
         return $this->render('view', [
             'model' => $this->findModel($id),
+            'dataProvider'=>$dataProvider
         ]);
     }
 

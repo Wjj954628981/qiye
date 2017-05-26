@@ -65,15 +65,16 @@ class ProductWarehouseOutOrderController extends Controller
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
-    public function actionCreate()
+   public function actionCreate()
     {
         $model = new ProductWarehouseOutOrder();
 
         if ($model->load(Yii::$app->request->post())) {//如果成功传过来order_id
             //print_r($model);
             if(!$model->save()){//如果在
-                echo 'fail';
-                var_dump($order_id);
+                // echo 'fail';
+
+                // var_dump($order_id);
             }else{
                 // echo 'add out';
                 $order_id = $model->order_id;
@@ -132,8 +133,17 @@ class ProductWarehouseOutOrderController extends Controller
                     //判断选择所需货物数量是否为0
                     if($product_count!=0){
                         //说明不能出库，需要调动事务回滚
-                        echo 'product fail</br>';
+                        // echo 'product fail</br>';
                         $transaction->rollBack();
+                        $str=<<<mark
+<script language="javascript" type="text/javascript"> 
+            alert("产品数量不足！！！");    
+            window.location = 'index.php?r=product-warehouse-out-order/create'    
+</script>
+mark;
+                        echo $str;
+                        
+                        // $this->redirect(['/material-warehouse-out-order/create']);
                     }          
                 }
                 if($product_count==0){
@@ -141,10 +151,9 @@ class ProductWarehouseOutOrderController extends Controller
                     $order->order_state=2;
                     if($order->save()){
                         $transaction->commit();
-                        $this->redirect(['orderlistiew', 'id'=>$order_id ]);
+                        $this->redirect(['orderlist/view', 'id'=>$order_id ]);
                     }                   
                 }
-
             }
 
         } else {

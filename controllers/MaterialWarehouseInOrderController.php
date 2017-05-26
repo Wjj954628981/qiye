@@ -9,6 +9,7 @@ use app\models\MaterialWarehouseIn;
 use app\models\SearchMaterialWarehouseInOrder;
 use app\models\ProductWarehouseInOrder;
 use app\models\SearchProductWarehouseInOrder;
+use app\models\WarehouseMaterial;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -188,9 +189,14 @@ class MaterialWarehouseInOrderController extends Controller
                     $modeldetail->material_id = $message['id'];
                     $modeldetail->material_in_orderid = $model->material_in_orderid;
 
+                    $warehouse =  WarehouseMaterial::find()->where(['warehouse_id'=>$warehouse_id])->one();
+                    $warehouse->material_count = $warehouse->material_count+(string)$message['num'];
+                    $warehouse->save();
                     //界面中无所谓 控制器需要将cookie对象转换为string
                     $modeldetail->material_in_count = (string)$message['num'];
                     $modeldetail->save();
+
+                    // $cookies_response->remove('message'.$message['id']);
                 }
             }
         }

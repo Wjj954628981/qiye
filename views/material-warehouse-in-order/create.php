@@ -59,7 +59,17 @@ use yii\grid\GridView;
                     'class' => 'btn-a',
                     ];
                     return Html::a('<span class="glyphicon glyphicon-plus"></span>', "", $options);
-   	         	}
+   	         	},
+   	         	// 'test'=>function($url, $model, $key){
+   	         	// 	$options = [
+              //       'title' => Yii::t('yii', 'Add'),
+              //       'aria-label' => Yii::t('yii', 'Add'),
+              //       'data-pjax' => '0',
+              //       'id' => $key,
+              //       'class' => 'btn-a',
+              //       ];
+              //       return Html::a('<input type="test">', "", $options);
+   	         	// }
             ]
         ]	
     ],

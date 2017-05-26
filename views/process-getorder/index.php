@@ -27,6 +27,7 @@ foreach ($processes as $process) {
     <div class="row">
     <div class="col-md-2">
     <?= Nav::widget([
+        // 'options' => ['class' => 'nav nav-list bs-docs-sidenav affix'],
         'items' =>$list
     ]); ?>
     </div>
@@ -47,7 +48,24 @@ foreach ($processes as $process) {
                 'attribute'=>'process_getordertime',
                 'format'=>'datetime',
                 'enableSorting'=>false
-            ]
+            ],
+            [
+                'header' => "操作",
+                'class' => 'yii\grid\ActionColumn',
+                'template' => '{view}',
+                'urlCreator' => function ($action, $model, $key, $index) {
+                    switch($action)
+                    {
+                        case 'view':
+                            return 'index.php?r=process-getorder%2Fview&id=' . $model->process_getorderid;
+                            break;
+                        // case 'update':
+                        //     return 'index.php?r=product-warehouse-in-order%2Fupdate&id=' . $model->product_in_orderid;
+                        //     break;
+                    }
+
+                },
+            ],
         ],
         'emptyText'=>'当前无数据',
         'emptyTextOptions'=>['style'=>'color:red;font-weight:bold'],
