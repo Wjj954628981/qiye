@@ -39,6 +39,7 @@ class SupplierController extends Controller
     {
         $searchModel = new SearchSupplier();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $dataProvider->Pagination->defaultPageSize = 10;
 
         return $this->render('index', [
             'searchModel' => $searchModel,

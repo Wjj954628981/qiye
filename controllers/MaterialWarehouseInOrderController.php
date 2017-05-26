@@ -196,7 +196,7 @@ class MaterialWarehouseInOrderController extends Controller
                     $modeldetail->material_in_count = (string)$message['num'];
                     $modeldetail->save();
 
-                    // $cookies_response->remove('message'.$message['id']);
+                    $cookies_response->remove('message'.$message['id']);
                 }
             }
         }

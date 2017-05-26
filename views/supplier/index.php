@@ -51,7 +51,7 @@ $this->title = '供应商';
                             return 'index.php?r=supplier/view&id=' . $model->supplier_id;
                             break;
                         case 'update':
-                            return 'index.php?r=supplier/view&id=' . $model->supplier_id;
+                            return 'index.php?r=supplier/update&id=' . $model->supplier_id;
                             break;
                         case 'delete':
                             return 'index.php?r=supplier/delete&id='.$model->supplier_id;

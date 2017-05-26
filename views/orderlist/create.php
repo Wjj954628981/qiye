@@ -6,6 +6,7 @@ use yii\grid\GridView;
 /* @var $this yii\web\View */
 /* @var $model app\models\MaterialWarehouseInOrder */
 $this->title = '创建订单';
+$username = yii::$app->user->identity->getUsername();
 // $this->params['breadcrumbs'][] = ['label' => 'Material Warehouse In Orders', 'url' => ['index']];
 // $this->params['breadcrumbs'][] = $this->title;
 ?>
@@ -97,7 +98,7 @@ $this->title = '创建订单';
 </tbody>
 </table>
 
-<input type="text" placeholder="下单人员" id="person_name" class="form-control">
+<input type="text" placeholder="下单人员" id="person_name" class="form-control" value=<?=$username?>>
 <hr>
 <input type="text" placeholder="交货时间" id="duetime" class="form-control">
 <hr>

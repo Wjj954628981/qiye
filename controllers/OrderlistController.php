@@ -145,7 +145,7 @@ class OrderlistController extends Controller
  
         $cookies->add(new \yii\web\Cookie([
             'name' => 'message'.$key,
-            'value' => 0,
+            'value' => 1,
             'expire'=>time()+360
         ]));
         return $this->redirect(['create']);
@@ -198,6 +198,8 @@ class OrderlistController extends Controller
                     //界面中无所谓 控制器需要将cookie对象转换为string
                     $modeldetail->product_count = (string)$message['num'];
                     $modeldetail->save(false) ;
+
+                    $cookies_response->remove('message'.$message['id']);
                 }
                  return $this->redirect(['view','id'=>$model->order_id]);
           //  }

@@ -113,9 +113,10 @@ $this->title = '材料出库单';
 
 <?php
 $this->registerJs(<<<JS
-    var process_getorderid = $("#process_getorderid").val();
+    
     $(".btn").click(function(e){
-        alert(process_getorderid);
+        var process_getorderid = $("#process_getorderid").val();
+        // alert(process_getorderid);
         window.location="?r=material-warehouse-out-order/create&process_getorderid="+process_getorderid;
     });
 JS

@@ -20,6 +20,9 @@ AppAsset::register($this);
     <?= Html::csrfMetaTags() ?>
     <title><?= Html::encode($this->title) ?></title>
     <?php $this->head() ?>
+    <style type="text/css">  
+        .nav > li:hover .dropdown-menu {display: block;} 
+    </style>
 </head>
 <body>
 <?php $this->beginBody() ?>
@@ -30,7 +33,7 @@ AppAsset::register($this);
         'brandLabel' => '光电码盘管理系统',
         'brandUrl' => 'http://localhost/qiye/views/vic/material_category.php',
         'options' => [
-            'class' => 'navbar-inverse navbar-fixed-top',
+            'class' => 'navbar-default navbar-fixed-top',
         ],
     ]);
     echo Nav::widget([
@@ -66,12 +69,12 @@ AppAsset::register($this);
             // ['label' => '出库单', 'url' => ['/material-warehouse-out-order']],
             // ['label' => '入库单', 'url' => ['/material-warehouse-in-order']],
             Yii::$app->user->isGuest ? (
-                ['label' => 'Login', 'url' => ['/site/login']]
+                ['label' => '登录', 'url' => ['/site/login']]
             ) : (
                 '<li>'
                 . Html::beginForm(['/site/logout'], 'post')
                 . Html::submitButton(
-                    'Logout (' . Yii::$app->user->identity->username . ')',
+                    '登出 (' . Yii::$app->user->identity->username . ')',
                     ['class' => 'btn btn-link logout']
                 )
                 . Html::endForm()
