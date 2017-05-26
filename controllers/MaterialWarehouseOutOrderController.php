@@ -130,11 +130,10 @@ class MaterialWarehouseOutOrderController extends Controller
         }
     }
 
-    public function actionAdd(){//$employee_id, $material_outorder_remark, $process_getorderid
+    public function actionAdd(){
         $employee_id=Yii::$app->request->post('employee_id');
         $material_outorder_remark=Yii::$app->request->post('material_outorder_remark');
         $process_getorderid=Yii::$app->request->post('process_getorderid');
-
 
         $processGetOrder = ProcessGetorder::find()->where(['process_getorderid'=>$process_getorderid])->one();
         $processGetOrderDetails = ProcessGetorderDetail::find()->where(['process_getorderid'=>$process_getorderid])->all();
@@ -147,7 +146,7 @@ class MaterialWarehouseOutOrderController extends Controller
         $model->material_out_ordertime = time();
         $model->material_out_orderremark = $material_outorder_remark;
         $model->save(false);
-        $material_count = 5;
+        // $material_count = 5;
         foreach ($processGetOrderDetails as $processGetOrderDetail) {
             $warehouses = WarehouseMaterial::find()->where(['material_id'=>$processGetOrderDetail->material_id])->all();
             $material_count = $processGetOrderDetail->material_count;
@@ -178,28 +177,21 @@ class MaterialWarehouseOutOrderController extends Controller
                 }
             }
             if($material_count!=0){
-                $transaction->rollBack();
+                
                 $str=<<<mark
                 <script language="javascript" type="text/javascript"> 
                         alert("!!!!!!!!!!!!!!!");    
                         window.location = 'index.php?r=material-warehouse-out-order/create'    
                 </script>
 mark;
-                echo $str;
-
-                
-                
+                echo $str; 
+                $transaction->rollBack();
              }
-                  
         }
-        if($material_count==0){
-            $transaction->commit();
-            $processGetOrder->delete(['process_getorderid'=>$process_getorderid]);
-             return $this->redirect(['view','id'=>$model['material_out_orderid']]); 
-             }
-       
-      
-      
+        // if($material_count==0){
+        $transaction->commit();
+        $processGetOrder->delete(['process_getorderid'=>$process_getorderid]);
+        return $this->redirect(['view','id'=>$model['material_out_orderid']]); 
+        // }
     }
-
 }
