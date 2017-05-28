@@ -39,6 +39,15 @@ AppAsset::register($this);
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav navbar-right'],
         'items' => [
+			['label' => 'Bom信息', 'icon' => 'file-code-o', 'url' => '#',
+					'items' => [
+							['label'=>'产品类别','icon'=>'circle-o','url'=>['/product-category'],],
+							['label'=>'产品列表','icon'=>'circle-o','url'=>['/product'],],
+							['label'=>'物料类别','icon'=>'circle-o','url'=>['/material-category'],],
+							['label'=>'物料列表','icon'=>'circle-o','url'=>['/material'],],
+							
+					]
+			],
             ['label'=>'我要买','url'=>['/orderlist/create']],
             ['label' => '订单列表', 'url' => ['/orderlist']],
             ['label'=>'流水线领料单','url'=>['/process-getorder','id'=>'']],
