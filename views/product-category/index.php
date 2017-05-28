@@ -7,26 +7,23 @@ use yii\grid\GridView;
 /* @var $searchModel app\models\SearchProductCategory */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Product Categories';
+$this->title = '产品类别目录';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="product-category-index">
 
-    <h1><?= Html::encode($this->title) ?></h1>
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
+<br>
 
     <p>
-        <?= Html::a('Create Product Category', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('新建一个产品类别', ['create'], ['class' => 'btn btn-primary']) ?>
     </p>
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
 
-            'product_category_id',
-            'product_category_name',
-
+            ['attribute'=>'product_category_name',
+            	'label'=>'产品类别名称'],
             ['class' => 'yii\grid\ActionColumn'],
         ],
     ]); ?>

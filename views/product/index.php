@@ -1,4 +1,5 @@
 <?php
+namespace app\models;
 
 use yii\helpers\Html;
 use yii\grid\GridView;
@@ -7,25 +8,40 @@ use yii\grid\GridView;
 /* @var $searchModel app\models\SearchProduct */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Products';
+$this->title = '产品目录';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
+
+<br>
+
 <div class="product-index">
 
-    <h1><?= Html::encode($this->title) ?></h1>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
-    <p>
-        <?= Html::a('Create Product', ['create'], ['class' => 'btn btn-success']) ?>
+       <p>
+        <?= Html::a('新建一个产品信息', ['create'], ['class' => 'btn btn-primary']) ?>
     </p>
     <?= GridView::widget([
-        'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
+    		'dataProvider' => $dataProviderProduct,
+    
+    		'filterModel' => $searchModelProduct,
         'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
 
-            'product_id',
-            'product_category_id',
+            [
+            		'attribute'=>'product_id',
+            		'headerOptions' => ['width' => '30'],
+			],
+        	[
+        			'attribute'=>'product_category_id',
+        			'label'=>'类别',
+        			'value'=>'productCategory.product_category_name',
+        			'headerOptions' => ['width' => '240'],
+        			'filter'=>ProductCategory::find()
+        					->select(['product_category_name','product_category_id'])
+        					->orderBy('product_category_name')
+        					->indexBy('product_category_id')
+        					->column(),
+            ],
             'product_name',
             'product_price',
 

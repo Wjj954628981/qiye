@@ -12,7 +12,7 @@ $this->title = '创建材料出库单';
 
 
 // $this->params['breadcrumbs'][] = ['label' => 'Material Warehouse Out Orders', 'url' => ['index']];
-// $this->params['breadcrumbs'][] = $this->title;
+$this->params['breadcrumbs'][] = $this->title;
 
 $searchModel = new SearchProcessGetorderDetail(['process_getorderid'=>$process_getorderid]);
 $dataProvider = $searchModel->search([]);

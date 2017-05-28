@@ -5,7 +5,7 @@ use yii\grid\GridView;
 /* @var $searchModel app\models\SearchOrderlist */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 $this->title = '订单列表';
- // $this->params['breadcrumbs'][] = $this->title;
+ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="orderlist-index">
 

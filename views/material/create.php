@@ -6,13 +6,13 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model app\models\Material */
 
-$this->title = 'Create Material';
-$this->params['breadcrumbs'][] = ['label' => 'Materials', 'url' => ['index']];
+$this->title = '新建物料信息';
+$this->params['breadcrumbs'][] = ['label' => '物料目录', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
+<br>
 <div class="material-create">
 
-    <h1><?= Html::encode($this->title) ?></h1>
 
     <?= $this->render('_form', [
         'model' => $model,

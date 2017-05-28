@@ -5,14 +5,14 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model app\models\MaterialCategory */
 
-$this->title = 'Update Material Category: ' . $model->material_category_id;
-$this->params['breadcrumbs'][] = ['label' => 'Material Categories', 'url' => ['index']];
-$this->params['breadcrumbs'][] = ['label' => $model->material_category_id, 'url' => ['view', 'id' => $model->material_category_id]];
-$this->params['breadcrumbs'][] = 'Update';
+$this->title = '修改物料类别信息 ' .'-'. $model->material_category_name;
+$this->params['breadcrumbs'][] = ['label' => '物料类别目录', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => $model->material_category_name, 'url' => ['view', 'id' => $model->material_category_id]];
+$this->params['breadcrumbs'][] = '修改';
 ?>
+<br>
 <div class="material-category-update">
 
-    <h1><?= Html::encode($this->title) ?></h1>
 
     <?= $this->render('_form', [
         'model' => $model,

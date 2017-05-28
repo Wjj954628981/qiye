@@ -6,20 +6,19 @@ use yii\widgets\DetailView;
 /* @var $this yii\web\View */
 /* @var $model app\models\ProductCategory */
 
-$this->title = $model->product_category_id;
-$this->params['breadcrumbs'][] = ['label' => 'Product Categories', 'url' => ['index']];
+$this->title = $model->product_category_name;
+$this->params['breadcrumbs'][] = ['label' => '产品类别目录', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="product-category-view">
 
-    <h1><?= Html::encode($this->title) ?></h1>
-
+<br>
     <p>
-        <?= Html::a('Update', ['update', 'id' => $model->product_category_id], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('Delete', ['delete', 'id' => $model->product_category_id], [
+        <?= Html::a('修改类别信息', ['update', 'id' => $model->product_category_id], ['class' => 'btn btn-primary']) ?>
+        <?= Html::a('删除类别信息', ['delete', 'id' => $model->product_category_id], [
             'class' => 'btn btn-danger',
             'data' => [
-                'confirm' => 'Are you sure you want to delete this item?',
+                'confirm' => '确定要删除该类别么?该操作不可逆。',
                 'method' => 'post',
             ],
         ]) ?>
@@ -28,8 +27,17 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
-            'product_category_id',
-            'product_category_name',
+        		
+			[
+        			'attribute'=>'product_category_id',
+        			'label'=>'产品类别目录ID',
+        			'value'=>$model->product_category_id,
+        	],
+        		[
+        				'attribute'=>'product_category_name',
+        				'label'=>'产品类别目录',
+        				'value'=>$model->product_category_name,
+        		],
         ],
     ]) ?>
 

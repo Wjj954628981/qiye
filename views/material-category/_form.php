@@ -11,13 +11,14 @@ use yii\widgets\ActiveForm;
 <div class="material-category-form">
 
     <?php $form = ActiveForm::begin(); ?>
+        <?= $form->field($model, 'material_category_id')->textInput()->label('物料类别型号')?>
+    
 
-    <?= $form->field($model, 'material_category_id')->textInput() ?>
 
-    <?= $form->field($model, 'material_category_name')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'material_category_name')->textInput(['maxlength' => true])->label('物料类别名称')?>
 
     <div class="form-group">
-        <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+        <?= Html::submitButton($model->isNewRecord ? '新建' : '修改', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

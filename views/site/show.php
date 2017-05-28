@@ -7,8 +7,8 @@
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
 
-// $this->title = '登录';
-// $this->params['breadcrumbs'][] = $this->title;
+$this->title = '登录';
+$this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="site-login">
 

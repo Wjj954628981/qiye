@@ -101,9 +101,12 @@ class MaterialController extends Controller
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
-
-        return $this->redirect(['index']);
+    	$temp = ProductMaterial::find()->where(['material_id' => $id])->all();
+    	foreach ($temp as $key){
+    		$key->delete();
+    	}
+    	$this->findModel($id)->delete();
+    	return $this->redirect(['index']);
     }
 
     /**

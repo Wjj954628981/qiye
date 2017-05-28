@@ -177,15 +177,16 @@ class MaterialWarehouseOutOrderController extends Controller
                 }
             }
             if($material_count!=0){
-                
-                $str=<<<mark
+                $transaction->rollBack();
+                /*$str=<<<mark
                 <script language="javascript" type="text/javascript"> 
                         alert("!!!!!!!!!!!!!!!");    
                         window.location = 'index.php?r=material-warehouse-out-order/create'    
                 </script>
 mark;
-                echo $str; 
-                $transaction->rollBack();
+                echo $str; */
+                // echo 'fail';
+                
              }
         }
         // if($material_count==0){

@@ -5,7 +5,6 @@
 $this->title = '光电码盘管理系统';
 ?>
 <!-- <div class="site-index">
-
     <div class="jumbotron">
         <h1>Congratulations!</h1>
 

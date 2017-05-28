@@ -12,45 +12,36 @@ use app\models\MaterialCategory;
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
 $this->title = '仓库';
-
 $data = array();
 $materials = MaterialCategory::find()->all();
 foreach ($materials as $material) {
     $data['name'][] = $material['material_category_name'];
 }
-
 $warehousematerials = WarehouseMaterial::find()->all();
 foreach ($warehousematerials as $warehousematerial) {
     $material_category_id = Material::find()->where(['material_id'=>$warehousematerial['material_id']])->one()['material_category_id'];
     $material_category_name = MaterialCategory::find()->where(['material_category_id'=>$material_category_id])->one()['material_category_name'];
     $data['count'][] = array('value'=>$warehousematerial['material_count'],'name'=>$material_category_name);
 }
-
 foreach($data['count'] as $v) {
   if(! isset($res[$v['name']])) $res[$v['name']] = 0;
   $res[$v['name']] += $v['value'];
 }
-
 $result = array();
 foreach ($res as $key) {
     $result[] = array('value'=>$key, 'name'=>array_search($key, $res));
 }
+// $name = \yii\helpers\Json::htmlEncode(
+//      \Yii::t('app', $data['name'])
+//     );
 
-// echo "<br><br><br><br><br>";
-// print_r($result);
-
-$name = \yii\helpers\Json::htmlEncode(
-     \Yii::t('app', $data['name'])
-    );
-
-$result = \yii\helpers\Json::htmlEncode(
-     \Yii::t('app', $result)
-    );
-
+// $result = \yii\helpers\Json::htmlEncode(
+//      \Yii::t('app', $result)
+//     );
 // $test = \yii\helpers\Json::htmlEncode(
 //      \Yii::t('app', 2)
 //     );
-// $this->params['breadcrumbs'][] = $this->title;
+$this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="warehouse-index">
 
@@ -166,7 +157,6 @@ $result = \yii\helpers\Json::htmlEncode(
         <!-- </div> -->
     </div>
 </div>
-
 <div class="modal fade" id="addEmployee" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -177,50 +167,50 @@ $result = \yii\helpers\Json::htmlEncode(
 
 <script src="http://echarts.baidu.com/build/dist/echarts.js"></script>
 <?php
-$this->registerJs(<<<JS
-    require.config({
-        paths: {
-            echarts: 'http://echarts.baidu.com/build/dist'
-        }
-    });
-    require(
-        [
-            'echarts',
-            'echarts/chart/pie'
-        ],
-        function (ec) {
-            var myChart = ec.init(document.getElementById('main')); 
-            option = {
-                tooltip : {
-                    trigger: 'item',
-                    formatter: "{a} <br/>{b} : {c} ({d}%)"
-                },
-                legend: {
-                    orient: 'horizontal',
-                    left: 'left',
-                    data: $name
-                },
-                series : [
-                    {
-                        name: '访问来源',
-                        type: 'pie',
-                        radius : '55%',
-                        center: ['50%', '50%'],
-                        data:$result,
-                        itemStyle: {
-                            emphasis: {
-                                shadowBlur: 10,
-                                shadowOffsetX: 0,
-                                shadowColor: 'rgba(0, 0, 0, 0.5)'
-                            }
-                        }
-                    }
-                ]
-            };
+// $this->registerJs(<<<JS
+//     require.config({
+//         paths: {
+//             echarts: 'http://echarts.baidu.com/build/dist'
+//         }
+//     });
+//     require(
+//         [
+//             'echarts',
+//             'echarts/chart/pie'
+//         ],
+//         function (ec) {
+//             var myChart = ec.init(document.getElementById('main')); 
+//             option = {
+//                 tooltip : {
+//                     trigger: 'item',
+//                     formatter: "{a} <br/>{b} : {c} ({d}%)"
+//                 },
+//                 legend: {
+//                     orient: 'horizontal',
+//                     left: 'left',
+//                     data: $name
+//                 },
+//                 series : [
+//                     {
+//                         name: '访问来源',
+//                         type: 'pie',
+//                         radius : '55%',
+//                         center: ['50%', '50%'],
+//                         data:$result,
+//                         itemStyle: {
+//                             emphasis: {
+//                                 shadowBlur: 10,
+//                                 shadowOffsetX: 0,
+//                                 shadowColor: 'rgba(0, 0, 0, 0.5)'
+//                             }
+//                         }
+//                     }
+//                 ]
+//             };
     
-            myChart.setOption(option); 
-        }
-    );
-JS
-);
+//             myChart.setOption(option); 
+//         }
+//     );
+// JS
+// );
 ?>

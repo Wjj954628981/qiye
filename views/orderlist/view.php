@@ -43,6 +43,7 @@ $this->title = $model->order_id;
                     'enableSorting'=>false
                 ],
                 [
+                    'label'=>'产品名称',
                     'attribute' => 'product_name',
                     'value' => 'product.product_name'
                 ],

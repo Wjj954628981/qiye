@@ -12,12 +12,13 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'product_category_id')->textInput() ?>
+        <?= $form->field($model, 'product_category_id')->textInput()->label('产品类别型号')?>
 
-    <?= $form->field($model, 'product_category_name')->textInput(['maxlength' => true]) ?>
+
+    <?= $form->field($model, 'product_category_name')->textInput(['maxlength' => true])->label('产品类别名称')?>
 
     <div class="form-group">
-        <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+        <?= Html::submitButton($model->isNewRecord ? '新建' : '修改', ['class' => $model->isNewRecord ? 'btn btn-primary' : 'btn btn-primary']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

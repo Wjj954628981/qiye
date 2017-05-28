@@ -8,7 +8,7 @@ use yii\grid\GridView;
 $this->title = '创建订单';
 $username = yii::$app->user->identity->getUsername();
 // $this->params['breadcrumbs'][] = ['label' => 'Material Warehouse In Orders', 'url' => ['index']];
-// $this->params['breadcrumbs'][] = $this->title;
+$this->params['breadcrumbs'][] = $this->title;
 ?>
 
 <?php

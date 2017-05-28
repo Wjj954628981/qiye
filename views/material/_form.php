@@ -2,6 +2,10 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use app\models\MaterialCategory;
+use yii\helpers\ArrayHelper;
+
+
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Material */
@@ -12,16 +16,23 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'material_id')->textInput() ?>
 
-    <?= $form->field($model, 'material_category_id')->textInput() ?>
+	<?php 
+	$cgObjs = MaterialCategory::find()->all();
+	$allCategory = ArrayHelper::map($cgObjs, 'material_category_id', 'material_category_name');
+	?>
+	    <?= $form->field($model, 'material_id')->textInput()->label('物料型号')?>
+	
+    <?= $form->field($model, 'material_category_id')
+    	->dropDownList($allCategory,
+    			['prompt'=>'请选择物料种类']);?>
 
-    <?= $form->field($model, 'material_name')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'material_name')->textInput(['maxlength' => true])->label('物料名称') ?>
 
-    <?= $form->field($model, 'material_min')->textInput() ?>
+    <?= $form->field($model, 'material_min')->textInput()->label('最小物料量')?>
 
     <div class="form-group">
-        <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+        <?= Html::submitButton($model->isNewRecord ? '新建' : '修改', ['class' => $model->isNewRecord ? 'btn btn-primary' : 'btn btn-primary']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

@@ -43,9 +43,9 @@ class OrderProduct extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'order_id' => 'Order ID',
-            'product_id' => 'Product ID',
-            'product_count' => 'Product Count',
+            'order_id' => '订单ID',
+            'product_id' => '产品ID',
+            'product_count' => '产品Count',
         ];
     }
 

@@ -10,7 +10,7 @@ use yii\bootstrap\Nav;
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
 $this->title = '领料单';
-// $this->params['breadcrumbs'][] = $this->title;
+$this->params['breadcrumbs'][] = $this->title;
 $processes = Process::find()->all();
 $list = array();
 // for($i=0;$i<5;$i++){

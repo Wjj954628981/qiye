@@ -8,9 +8,8 @@ use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
 
 $this->title = '登录';
-// $this->params['breadcrumbs'][] = $this->title;
+$this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="site-login">
     <h2><?= Html::encode("请输入用户名和密码") ?></h2>
 
     <!-- <p>请输入用户名和密码:</p> -->
@@ -44,4 +43,3 @@ $this->title = '登录';
         You may login with <strong>admin/admin</strong> or <strong>demo/demo</strong>.<br>
         To modify the username/password, please check out the code <code>app\models\User::$users</code>.
     </div> -->
-</div>

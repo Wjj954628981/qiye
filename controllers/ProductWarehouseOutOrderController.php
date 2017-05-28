@@ -89,46 +89,46 @@ class ProductWarehouseOutOrderController extends Controller
                     //var_dump($warehouse);
                     
                     foreach ($warehouses as $warehouse) {
-                            if($warehouse->product_count > $product_count){//如果当前仓库库存量可以满足要求
-                                $warehouse->product_count = $warehouse->product_count-$product_count;
-                                $modelOrder = new ProductWarehouseOut();
-                                $modelOrder->product_id=$product->product_id;
-                                $modelOrder->warehouse_id=$warehouse->warehouse_id;
-                                $modelOrder->product_out_orderid = $model->product_out_orderid;
-                                $modelOrder->product_out_count = $product_count;
-                                $product_count = 0;
-                                if($modelOrder->save()){//添加货物出库的详细信息
-                                    //echo 'warehouse detial success</br>';
-                                }else{
-                                    //echo 'warehouse detial success</br>';
-                                }
-                                if($warehouse->save()){
-                                    //echo 'warehouse success</br>';
-                                    break;
-                                }else{
-                                    //echo 'warehouse fail</br>';
-                                    break;
-                                }
-                            }else{//如果当前仓库库存量不能满足要求
-                                $product_count = $product_count - $warehouse->product_count;
-                                $modelOrder = new ProductWarehouseOut();
-                                $modelOrder->product_id=$product->product_id;
-                                $modelOrder->warehouse_id=$warehouse->warehouse_id;
-                                $modelOrder->product_out_orderid =$model->product_out_orderid;
-                                $modelOrder->product_out_count = $warehouse->product_count;
-                                $warehouse->product_count = 0;
-                                if($modelOrder->save()){//添加货物出库的详细信息
-                                    //echo 'warehouse changed detial success</br>';
-                                }else{
-                                    //echo 'warehouse changed detial success</br>';
-                                }
-                                $warehouse->product_count = 0;
-                                if($warehouse->save()){
-                                    //echo 'warehouse changed</br>';
-                                }else{
-                                    //echo 'warehouse changed fail</br>';
-                                }
+                        if($warehouse->product_count > $product_count){//如果当前仓库库存量可以满足要求
+                            $warehouse->product_count = $warehouse->product_count-$product_count;
+                            $modelOrder = new ProductWarehouseOut();
+                            $modelOrder->product_id=$product->product_id;
+                            $modelOrder->warehouse_id=$warehouse->warehouse_id;
+                            $modelOrder->product_out_orderid = $model->product_out_orderid;
+                            $modelOrder->product_out_count = $product_count;
+                            $product_count = 0;
+                            if($modelOrder->save()){//添加货物出库的详细信息
+                                //echo 'warehouse detial success</br>';
+                            }else{
+                                //echo 'warehouse detial success</br>';
                             }
+                            if($warehouse->save()){
+                                //echo 'warehouse success</br>';
+                                break;
+                            }else{
+                                //echo 'warehouse fail</br>';
+                                break;
+                            }
+                        }else{//如果当前仓库库存量不能满足要求
+                            $product_count = $product_count - $warehouse->product_count;
+                            $modelOrder = new ProductWarehouseOut();
+                            $modelOrder->product_id=$product->product_id;
+                            $modelOrder->warehouse_id=$warehouse->warehouse_id;
+                            $modelOrder->product_out_orderid =$model->product_out_orderid;
+                            $modelOrder->product_out_count = $warehouse->product_count;
+                            $warehouse->product_count = 0;
+                            if($modelOrder->save()){//添加货物出库的详细信息
+                                //echo 'warehouse changed detial success</br>';
+                            }else{
+                                //echo 'warehouse changed detial success</br>';
+                            }
+                            $warehouse->product_count = 0;
+                            if($warehouse->save()){
+                                //echo 'warehouse changed</br>';
+                            }else{
+                                //echo 'warehouse changed fail</br>';
+                            }
+                        }
                     }
                     //判断选择所需货物数量是否为0
                     if($product_count!=0){
